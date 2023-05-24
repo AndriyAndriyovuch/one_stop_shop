@@ -11,29 +11,22 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  let!(:order) { build(:order) }
-
-  it "is valid with valid attributes" do
-    expect(order).to be_valid
-  end
-
-  it "is not valid without a firstname" do
-    order2 = build(:order, firstname: '')
-    expect(order2).to_not be_valid
-  end
-
-  it "is not valid without a lastname" do
-    order2 = build(:order, lastname: '')
-    expect(order2).to_not be_valid
-  end
-
-  it "is not valid without an address" do
-    order2 = build(:order, address: '')
-    expect(order2).to_not be_valid
-  end
-
-  it "is not valid without an phone" do
-    order2 = build(:order, phone: '')
-    expect(order2).to_not be_valid
-  end
+  it {
+    is_expected.to validate_presence_of(:firstname)
+  }
+  it {
+    is_expected.to validate_presence_of(:lastname)
+  }
+  it {
+    is_expected.to validate_presence_of(:address)
+  }
+  it {
+    is_expected.to validate_presence_of(:phone)
+  }
+  it {
+    is_expected.to have_many(:products)
+  }
+  it {
+    is_expected.to have_many(:product_orders)
+  }
 end
