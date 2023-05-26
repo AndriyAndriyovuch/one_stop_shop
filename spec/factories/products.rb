@@ -20,4 +20,3 @@ FactoryBot.define do
     balance { rand(20..60) }
   end
 end
-
