@@ -10,15 +10,12 @@
 require 'rails_helper'
 
 RSpec.describe ProductOrder, type: :model do
-  it {
-    is_expected.to validate_numericality_of(:amount).
-      is_greater_than(0)
-  }
+  describe "validations" do
+    it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
+  end
 
-  it {
-    is_expected.to belong_to(:order)
-  }
-  it {
-    is_expected.to belong_to(:product)
-  }
+  describe 'associations' do
+    it { is_expected.to belong_to(:order) }
+    it { is_expected.to belong_to(:product) }
+  end
 end

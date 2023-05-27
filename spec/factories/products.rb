@@ -13,7 +13,6 @@ require 'faker'
 
 FactoryBot.define do
   factory :product do
-    id { 66 }
     name { Faker::Game.title }
     description { Faker::Lorem.paragraph(sentence_count: 3) }
     price { rand(15.0..99.0) }
