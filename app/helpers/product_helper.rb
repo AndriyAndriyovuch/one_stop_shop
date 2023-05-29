@@ -1,5 +1,5 @@
 module ProductHelper
-  def description_class(action)
-    action == 'show' ? 'my-5' : 'my-5 truncate'
+  def truncate?
+    'truncate' if action_name != 'show'
   end
 end
