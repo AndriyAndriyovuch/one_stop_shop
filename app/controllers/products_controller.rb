@@ -53,10 +53,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-<<<<<<< HEAD
     params.require(:product).permit(:name, :description, :price, :balance)
-=======
-    params.fetch(:product, {})
->>>>>>> add product and order controllers, views, routes, request and routing tests
   end
 end
