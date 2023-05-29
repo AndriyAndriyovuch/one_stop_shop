@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
-
   def index
     @products = collection
   end
@@ -55,6 +53,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.fetch(:product, {})
+    params.require(:product).permit(:name, :description, :price, :balance)
   end
 end

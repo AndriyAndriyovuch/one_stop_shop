@@ -1,7 +1,24 @@
-<div id="<%= dom_id product %>">
-  <% if action_name != "show" %>
-    <%= link_to "Show this product", product, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this product', edit_product_path(product), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+<div class="w-full p-1 md:p-2">
+  <div id="<%= dom_id product %>">
+    <p class="my-5 font-semibold text-3xl truncate">
+      <%= product.name %>
+    </p>
+
+    <p class="<%= description_class(action_name) %>">
+      <%= product.description %>
+    </p>
+
+    <p class="my-5">
+      Price: <%= '%.2f' % product.price %> $
+    </p>
+
+    <p class="my-5">
+      Available: <%= product.balance %>
+    </p>
+
+    <% if action_name != "show" %>
+      <%= link_to "Show this product", product, class:"inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50" %>
+      <hr class="mt-6">
+    <% end %>
+  </div>
 </div>
