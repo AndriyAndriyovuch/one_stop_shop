@@ -7,6 +7,9 @@
 
 #   validates :amount, numericality: { greater_than: 0 }
 
+#   belongs_to :product
+#   belongs_to :order
+
 require 'rails_helper'
 
 RSpec.describe ProductOrder, type: :model do

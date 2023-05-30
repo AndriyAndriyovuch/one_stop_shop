@@ -8,6 +8,9 @@
 
 #   validates :first_name, :last_name, :address, :phone, presence: true
 
+#   has_many :product_orders, dependent: :destroy
+#   has_many :products, through: :product_orders
+
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do

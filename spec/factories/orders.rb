@@ -8,6 +8,9 @@
 
 #   validates :first_name, :last_name, :address, :phone, presence: true
 
+#   has_many :product_orders, dependent: :destroy
+#   has_many :products, through: :product_orders
+
 FactoryBot.define do
   factory :order do
     first_name { Faker::Name.first_name }

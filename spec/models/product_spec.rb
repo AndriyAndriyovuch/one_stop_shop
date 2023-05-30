@@ -6,8 +6,11 @@
 #   created at      datetime      null: false
 #   updated at      datetime      null: false
 
-#   validates :name, :description, presence: true
+#   validates :name, presence: true
 #   validates :price, :balance, numericality: { greater_than_or_equal_to: 0 }
+
+#   has_many :product_orders, dependent: :destroy
+#   has_many :orders, through: :product_orders
 
 require 'rails_helper'
 

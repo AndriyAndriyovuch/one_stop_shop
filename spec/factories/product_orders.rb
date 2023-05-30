@@ -7,6 +7,9 @@
 
 #   validates :amount, numericality: { greater_than: 0 }
 
+#   belongs_to :product
+#   belongs_to :order
+
 FactoryBot.define do
   factory :product_order do
     product
