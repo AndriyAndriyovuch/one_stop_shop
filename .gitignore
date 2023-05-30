@@ -59,6 +59,8 @@ yarn-debug.log*
 tmp/
 .idea/
 .DS_Store
+.vscode/
+.rubocop.yml
 
 /config/master.key
 /config/database.yml
