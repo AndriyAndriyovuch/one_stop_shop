@@ -1,8 +1,8 @@
 # table products
 #   name            string        null: false
-#   description     text          null: false
-#   price           decimal       null: false      precision: 8, scale: 2
-#   balance         integer       null: false
+#   description     text
+#   price           decimal       null: false      default: 0.0      precision: 8, scale: 2
+#   balance         integer       null: false      default: 0
 #   created at      datetime      null: false
 #   updated at      datetime      null: false
 
@@ -14,7 +14,6 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_numericality_of(:price) }
     it { is_expected.to validate_numericality_of(:balance) }
 

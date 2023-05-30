@@ -1,8 +1,8 @@
 # table products
 #   name            string        null: false
-#   description     text          null: false
-#   price           decimal       null: false      precision: 8, scale: 2
-#   balance         integer       null: false
+#   description     text
+#   price           decimal       null: false      default: 0.0      precision: 8, scale: 2
+#   balance         integer       null: false      default: 0
 #   created at      datetime      null: false
 #   updated at      datetime      null: false
 
