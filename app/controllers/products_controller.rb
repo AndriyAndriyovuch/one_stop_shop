@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   end
 
   def resourse
-    Product.find(params[:id])
+    collection.find(params[:id])
   end
 
   def product_params

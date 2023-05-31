@@ -20,7 +20,6 @@ RSpec.describe ProductsController, type: :routing do
       expect(get: "/products/13/edit").to route_to("products#edit", id: "13")
     end
 
-
     it "routes to #create" do
       expect(post: "/products").to route_to("products#create")
     end

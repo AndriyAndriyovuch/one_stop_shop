@@ -11,44 +11,28 @@
 
 #   resources :products
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "/products", type: :request do
   let!(:product) { create(:product, id: 13) }
 
-  let(:valid_attributes) { {product: {
-    id: 13,
-    name: "Witcher 3",
-    description: 'Quas consectetur mollitia. Et repellat qui. Dolor voluptas voluptatem. Repellendus consectetur explicabo.',
-    price: 99.99,
-    balance: 666}}}
-
-  let(:invalid_attributes) {{product: {
-    id: nil,
-    name: "",
-    description:' ',
-    price: 'price',
-    balance: 'balance'}}}
-
-  let(:new_attributes) { {product: {
-    id: 14,
-    name: "Hogwarts Legacy",
-    description: 'Nihil illo voluptatem. Praesentium neque sint. Qui voluptatem cupiditate.',
-    price: 50.02,
-    balance: 3}}}
+  let(:new_attributes) { { product: attributes_for(:product) } }
+  let(:valid_attributes) { { product: attributes_for(:product) } }
+  let(:invalid_attributes) { { product: attributes_for(:product, :invalid) } }
 
   describe "GET /index" do
     it "renders a successful response" do
       get products_path
       expect(response).to be_successful
+      expect(response).to render_template(:index)
     end
   end
 
   describe "GET /show" do
-    it {p product}
     it "renders a successful response" do
       get product_path(product)
       expect(response).to be_successful
+      expect(response).to render_template(:show)
     end
   end
 
@@ -56,6 +40,7 @@ RSpec.describe "/products", type: :request do
     it "renders a successful response" do
       get new_product_path
       expect(response).to be_successful
+      expect(response).to render_template(:new)
     end
   end
 
@@ -63,15 +48,14 @@ RSpec.describe "/products", type: :request do
     it "renders a successful response" do
       get edit_product_path(product)
       expect(response).to be_successful
+      expect(response).to render_template(:edit)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Product" do
-        expect {
-          post products_path, params: valid_attributes
-        }.to change(Product, :count).by(1)
+        expect { post products_path, params: valid_attributes }.to change(Product, :count).by(1)
       end
 
       it "redirects to the created product" do
@@ -82,17 +66,13 @@ RSpec.describe "/products", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Product" do
-        expect {
-          post products_path, params: invalid_attributes
-        }.to change(Product, :count).by(0)
+        expect { post products_path, params: invalid_attributes }.to change(Product, :count).by(0)
       end
-
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post products_path, params: invalid_attributes
         expect(response).to have_http_status(:unprocessable_entity)
       end
-
     end
   end
 
@@ -101,7 +81,7 @@ RSpec.describe "/products", type: :request do
       it "updates the requested product" do
         patch product_path(product), params: { product: new_attributes }
         product.reload
-        expect(controller.notice).to eq('Product was successfully updated.')
+        expect(controller.notice).to eq("Product was successfully updated.")
       end
 
       it "redirects to the product" do
@@ -112,20 +92,16 @@ RSpec.describe "/products", type: :request do
     end
 
     context "with invalid parameters" do
-
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         patch product_path(product), params: invalid_attributes
         expect(response).to have_http_status(:unprocessable_entity)
       end
-
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested product" do
-      expect {
-        delete product_path(product)
-      }.to change(Product, :count).by(-1)
+      expect { delete product_path(product) }.to change(Product, :count).by(-1)
     end
 
     it "redirects to the products list" do

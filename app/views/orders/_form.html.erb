@@ -1,17 +1,10 @@
-<%= form_with(model: order, class: "contents") do |form| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<%= simple_form_for @order, defaults: { input_html: { class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-2/3' } } do |f| %>
+  <%= render 'layouts/error', item: order %>
 
-      <ul>
-        <% order.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :address %>
+  <%= f.input :phone %>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+  <%= f.button :submit, class: 'rounded-lg py-3 my-5 ms-2 px-5 bg-neutral-800 text-white inline-block font-medium cursor-pointer' %>
 <% end %>

@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def resourse
-    Order.find(params[:id])
+    collection.find(params[:id])
   end
 
   def order_params

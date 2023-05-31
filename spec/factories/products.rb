@@ -21,4 +21,11 @@ FactoryBot.define do
     price { rand(15..99) }
     balance { rand(20..60) }
   end
+
+  trait :invalid do
+    name { nil }
+    description { nil }
+    price { -1 }
+    balance { -999 }
+  end
 end
