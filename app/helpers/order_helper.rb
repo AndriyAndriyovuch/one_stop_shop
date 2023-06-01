@@ -1,6 +1,6 @@
 module OrderHelper
   def select_sum(product)
-    session[:products][product.id.to_s] * product.price
+    format_decimal(session[:products][product.id.to_s] * product.price)
   end
 
   def total_sum
