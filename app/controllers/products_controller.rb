@@ -42,6 +42,24 @@ class ProductsController < ApplicationController
     redirect_to products_url, notice: "Product was successfully destroyed."
   end
 
+  def buy
+    session[:products] = {} unless session[:products]
+
+    if session[:products].has_key?(params[:product_id])
+      session[:products][params[:product_id]] += params[:amount].to_i
+    else
+      session[:products][params[:product_id]] = params[:amount].to_i
+    end
+
+    redirect_to products_path
+  end
+
+  def cancel_shipping
+    session[:products].delete(params[:id])
+
+    redirect_to orders_path
+  end
+
   private
 
   def collection
