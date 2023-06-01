@@ -1,8 +1,4 @@
 class OrdersController < ApplicationController
-  def index
-    @orders = collection
-  end
-
   def show
     @order = resourse
   end
@@ -19,7 +15,11 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      redirect_to @order, notice: "Order was successfully created."
+      create_product_orders
+      subtract_balance
+
+      redirect_to products_path, notice: "Order was successfully created."
+      session[:products] = {}
     else
       render :new, status: :unprocessable_entity
     end
@@ -54,5 +54,16 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
+  end
+
+  def create_product_orders
+    session[:products].each { |product_id, amount| @order.product_orders.create(product_id:, amount:) }
+  end
+
+  def subtract_balance
+    @order.products.each do |product|
+      new_balance = product.balance - @order.product_orders.find_by(product_id: product.id).amount
+      product.update(balance: new_balance)
+    end
   end
 end

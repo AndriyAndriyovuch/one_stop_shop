@@ -12,6 +12,6 @@ module OrderHelper
   end
 
   def session_products
-    session[:products].keys.map { |id| Product.find(id) }
+    @session_products = session[:products].keys.map { |id| Product.find(id) }
   end
 end
