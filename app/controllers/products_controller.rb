@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
 
     check_balance
 
-    redirect_to products_path
+    redirect_to products_path, notice: "Product was added to cart."
   end
 
   def cancel_shipping

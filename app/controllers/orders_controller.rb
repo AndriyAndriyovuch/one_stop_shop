@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       create_product_orders
       subtract_balance
 
-      redirect_to products_path, notice: "Order was successfully created."
+      redirect_to order_path(@order), notice: "Order was successfully created."
       session[:products] = {}
     else
       render :new, status: :unprocessable_entity

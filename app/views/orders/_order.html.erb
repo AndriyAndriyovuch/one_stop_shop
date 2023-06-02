@@ -1,0 +1,46 @@
+<div class="flex flex-col text-base text-neutral-600 dark:text-neutral-900">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+      	<div class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-300">
+	      	<ul class="ms-6 w-96">
+	      		<h1 class="font-bold text-3xl mb-5">Order №<%= order.id %></h1>
+			  <li class="mb-4"><%= full_name(order) %></li>
+			  <li class="mb-4"><%= order.address %></li>
+			  <li class="mb-4"><%= order.phone %></li>
+			</ul>
+
+	        <table class="min-w-full text-left text-sm font-light">
+
+	          <thead class="border-b font-medium dark:border-neutral-500">
+	            <tr>
+	              <% table_title.each do |item| %>
+	                <th scope="col" class="px-6 py-4"><%= item %></th>
+	              <% end %>
+	            </tr>
+	          </thead>
+
+	          <tbody>
+	            <% order.products.each do |product| %>
+	              <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+	                <td class="whitespace-nowrap px-6 py-4 font-medium"><%= order.products.index(product) + 1 %></td>
+	                <td class="whitespace-nowrap px-6 py-4"><%= product.name %></td>
+	                <td class="whitespace-nowrap px-6 py-4"><%= format_decimal(product.price) %></td>
+	                <td class="whitespace-nowrap px-6 py-4"><%= select_amount(order, product) %></td>
+	                <td class="whitespace-nowrap px-6 py-4"><%= select_order_sum(order, product) %></td>
+	              </tr>
+	            <% end %>
+	            <tr class="border-b dark:border-neutral-500">
+	              <td colspan="4" class="whitespace-nowrap px-6 py-2">
+	                Total sum
+	              </td>
+	              <td class="whitespace-nowrap px-6 py-2"><%= order_total_sum(order) %></td>
+	            </tr>
+
+	          </tbody>
+	        </table>
+	    </div>
+      </div>
+    </div>
+  </div>
+</div>
