@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
       subtract_balance
 
       redirect_to order_path(@order), notice: "Order was successfully created."
-      session[:products] = {}
+      session.delete(:products)
     else
       render :new, status: :unprocessable_entity
     end

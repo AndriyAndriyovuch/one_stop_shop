@@ -44,21 +44,14 @@ class ProductsController < ApplicationController
 
   def buy
     session[:products] = {} unless session[:products]
-    params[:amount] = 1 if params[:amount].blank?
-
-    if session[:products].has_key?(params[:product_id])
-      session[:products][params[:product_id]] += params[:amount].to_i
-    else
-      session[:products][params[:product_id]] = params[:amount].to_i
-    end
-
-    check_balance
+    session[:products].merge!(Products::Buy.new(params:).call)
 
     redirect_to products_path, notice: "Product was added to cart."
   end
 
   def cancel_shipping
     session[:products].delete(params[:id])
+    session.delete(:products) if session[:products].empty?
 
     redirect_to orders_path
   end
@@ -75,12 +68,5 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :balance)
-  end
-
-  def check_balance
-    product = Product.find(params[:product_id])
-
-    session[:products][params[:product_id]] =
-      product.balance if product.balance < session[:products][params[:product_id]]
   end
 end
