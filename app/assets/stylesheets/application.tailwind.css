@@ -11,3 +11,19 @@
 }
 
 */
+
+@layer components {
+  .black_button {
+    @apply inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50;
+  }
+
+  .cart-item {
+    @apply whitespace-nowrap px-6 py-4;
+  }
+
+}
+
+.logo-image {
+  width: 200px;
+  height: inherit;
+ }

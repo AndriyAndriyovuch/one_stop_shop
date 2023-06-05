@@ -16,8 +16,9 @@ gem "bootsnap", require: false
 gem "foreman"
 
 gem "font-awesome-rails"
-gem 'simple_form'
-gem 'simple_form-tailwind'
+gem "simple_form"
+gem "simple_form-tailwind"
+gem "inline_svg"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

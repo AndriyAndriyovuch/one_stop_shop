@@ -12,11 +12,11 @@
               </tr>
             </thead>
               <tbody>
-                <% session_products.each do |product| %>
+                <% session_products.each.with_index(1) do |product, index| %>
                   <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                    <td class="whitespace-nowrap px-6 py-4 font-medium"><%= session_products.index(product) + 1 %></td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium"><%= index %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= product.name %></td>
-                    <td class="whitespace-nowrap px-6 py-4"><%= format_decimal(product.price) %></td>
+                    <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(product.price) %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= session[:products][product.id.to_s] %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= select_session_sum(product) %></td>
                     <td class="whitespace-nowrap px-6 py-4">
@@ -35,8 +35,8 @@
               </tbody>
           </table>
 
-          <div id="order-form m-5">
-              <%= link_to 'Pay this order', new_order_path, class: "inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xl font-medium uppercase leading-normal text-neutral-50" %>
+          <div class="m-5">
+              <%= link_to 'Pay this order', new_order_path, class: "black_button" %>
           </div>
         <% else %>
             <div class="grid h-screen place-items-center text-3xl">Your cart is empty yet</div>

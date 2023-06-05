@@ -4,11 +4,11 @@ module OrderHelper
   end
 
   def select_session_sum(product)
-    format_decimal(session[:products][product.id.to_s] * product.price)
+    number_to_currency(session[:products][product.id.to_s] * product.price)
   end
 
   def select_order_sum(order, product)
-    format_decimal(order.product_orders.find_by(product_id: product.id).amount * product.price)
+    number_to_currency(order.product_orders.find_by(product_id: product.id).amount * product.price)
   end
 
   def select_amount(order, product)
@@ -16,11 +16,11 @@ module OrderHelper
   end
 
   def session_total_sum
-    format_decimal(session_products.map { |product| select_session_sum(product).to_f }.sum)
+    number_to_currency(session_products.map { |product| session[:products][product.id.to_s] * product.price }.sum)
   end
 
   def order_total_sum(order)
-    format_decimal(order.product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum)
+    number_to_currency(order.product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum)
   end
 
   def session_products
