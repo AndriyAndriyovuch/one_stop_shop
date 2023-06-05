@@ -20,7 +20,7 @@ module OrderHelper
   end
 
   def order_total_sum(order)
-    format_decimal(order.product_orders.map {|item| item.amount * Product.find(item.product_id).price}.sum)
+    format_decimal(order.product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum)
   end
 
   def session_products

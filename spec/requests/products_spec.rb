@@ -23,6 +23,7 @@ RSpec.describe "/products", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       get products_path
+
       expect(response).to be_successful
       expect(response).to render_template(:index)
     end
@@ -31,6 +32,7 @@ RSpec.describe "/products", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       get product_path(product)
+
       expect(response).to be_successful
       expect(response).to render_template(:show)
     end
@@ -39,6 +41,7 @@ RSpec.describe "/products", type: :request do
   describe "GET /new" do
     it "renders a successful response" do
       get new_product_path
+
       expect(response).to be_successful
       expect(response).to render_template(:new)
     end
@@ -47,6 +50,7 @@ RSpec.describe "/products", type: :request do
   describe "GET /edit" do
     it "renders a successful response" do
       get edit_product_path(product)
+
       expect(response).to be_successful
       expect(response).to render_template(:edit)
     end
@@ -55,11 +59,12 @@ RSpec.describe "/products", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Product" do
-        expect { post products_path, params: valid_attributes }.to change(Product, :count).by(1)
+        expect { post products_path, params: { product: valid_attributes[:product] } }.to change(Product, :count).by(1)
       end
 
       it "redirects to the created product" do
-        post products_path, params: valid_attributes
+        post products_path, params: { product: valid_attributes[:product] }
+
         expect(response).to redirect_to(product_path(Product.last))
       end
     end
@@ -71,6 +76,7 @@ RSpec.describe "/products", type: :request do
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post products_path, params: invalid_attributes
+
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -79,22 +85,29 @@ RSpec.describe "/products", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       it "updates the requested product" do
-        patch product_path(product), params: { product: new_attributes }
+        patch product_path(product), params: { product: new_attributes[:product] }
+
         product.reload
+
         expect(controller.notice).to eq("Product was successfully updated.")
+        expect(product.name).to eq(new_attributes[:product][:name])
       end
 
       it "redirects to the product" do
-        patch product_path(product), params: { product: new_attributes }
+        patch product_path(product), params: { product: new_attributes[:product] }
+
         product.reload
         expect(response).to redirect_to(product_path(product))
+        expect(product.name).to eq(new_attributes[:product][:name])
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         patch product_path(product), params: invalid_attributes
+
         expect(response).to have_http_status(:unprocessable_entity)
+        expect(product.name).not_to eq(invalid_attributes[:product][:name])
       end
     end
   end
@@ -106,6 +119,7 @@ RSpec.describe "/products", type: :request do
 
     it "redirects to the products list" do
       delete product_path(product)
+
       expect(response).to redirect_to(products_path)
     end
   end
