@@ -9,6 +9,6 @@ class Products::Buy
     @params[:amount] = product.balance if product.balance < @params[:amount].to_i
     @params[:amount] = 1 if @params[:amount].blank?
 
-    {@params[:product_id] => @params[:amount].to_i}
+    { @params[:product_id] => @params[:amount].to_i }
   end
 end

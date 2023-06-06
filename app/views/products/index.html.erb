@@ -7,11 +7,7 @@
 
   <div class="container mx-auto px-5 py-2">
     <div class="-m-1 flex flex-wrap md:-m-2">
-      <% @products.each do |product| %>
-        <div class="flex w-1/4 flex-wrap">
-          <%= render product %>
-        </div>
-      <% end %>
+      <%= render @products %>
     </div>
   </div>
 

@@ -17,7 +17,7 @@
                     <td class="whitespace-nowrap px-6 py-4 font-medium"><%= index %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= product.name %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(product.price) %></td>
-                    <td class="whitespace-nowrap px-6 py-4"><%= session[:products][product.id.to_s] %></td>
+                    <td class="whitespace-nowrap px-6 py-4"><%= session.dig(:products, product.id.to_s) %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= select_session_sum(product) %></td>
                     <td class="whitespace-nowrap px-6 py-4">
                       <%= button_to cancel_shipping_path(product), method: :delete do %>

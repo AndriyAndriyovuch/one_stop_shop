@@ -4,7 +4,7 @@ module OrderHelper
   end
 
   def select_session_sum(product)
-    number_to_currency(session[:products][product.id.to_s] * product.price)
+    number_to_currency(session.dig(:products, product.id.to_s) * product.price)
   end
 
   def select_order_sum(order, product)
@@ -16,7 +16,7 @@ module OrderHelper
   end
 
   def session_total_sum
-    number_to_currency(session_products.map { |product| session[:products][product.id.to_s] * product.price }.sum)
+    number_to_currency(session_products.map { |product| session.dig(:products, product.id.to_s) * product.price }.sum)
   end
 
   def order_total_sum(order)
