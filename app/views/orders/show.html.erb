@@ -36,7 +36,7 @@
                     <td colspan="4" class="whitespace-nowrap px-6 py-2">
                       Total sum
                     </td>
-                    <td class="whitespace-nowrap px-6 py-2"><%= order_total_sum(@order) %></td>
+                    <td class="whitespace-nowrap px-6 py-2"><%= number_to_currency(order_total_sum(@order)) %></td>
                   </tr>
 
                 </tbody>

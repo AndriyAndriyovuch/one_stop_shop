@@ -12,14 +12,14 @@ module OrderHelper
   end
 
   def order_product_sum(order, product)
-   order.product_orders.find_by(product_id: product.id).amount * product.price
+    order.product_orders.find_by(product:).amount * product.price
   end
 
   def select_amount(order, product)
-    order.product_orders.find_by(product_id: product.id).amount
+    order.product_orders.find_by(product:).amount
   end
 
   def order_total_sum(order)
-    number_to_currency(order.product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum)
+    order.product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum
   end
 end
