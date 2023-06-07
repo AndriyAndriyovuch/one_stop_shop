@@ -44,13 +44,15 @@ class ProductsController < ApplicationController
 
   def buy
     session[:products] = {} unless session[:products]
-    session[:products].merge!(Products::Buy.new(params:).call)
+    new_product = Products::Buy.new(params:).call
+
+    session[:products] = Session.new(session).add_product(new_product)
 
     redirect_to products_path, notice: "Product was added to cart."
   end
 
   def cancel_shipping
-    session[:products].delete(params[:id])
+    session[:products] = Session.new(session).delete_product(params[:id])
     session.delete(:products) if session[:products].empty?
 
     redirect_to orders_path

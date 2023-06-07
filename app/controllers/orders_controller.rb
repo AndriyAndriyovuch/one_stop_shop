@@ -43,11 +43,11 @@ class OrdersController < ApplicationController
   end
 
   def cart
-    if session[:products]
-      current_session = Products::Session.new(session[:products])
-      @session_products = current_session.products
-      @session_sum = current_session.sum
-    end
+    return unless session[:products]
+
+    current_session = Session.new(session)
+    @session_products = current_session.products
+    @session_sum = current_session.sum
   end
 
   private

@@ -1,8 +1,4 @@
 module OrderHelper
-  def table_title
-    ["#", "Title", "Price", "Amount", "Sum", ""]
-  end
-
   def full_name(order)
     "#{order.first_name} #{order.last_name}"
   end
