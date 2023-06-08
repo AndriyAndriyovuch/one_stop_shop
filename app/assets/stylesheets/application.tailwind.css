@@ -2,28 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
-
-*/
-
-@layer components {
-  .black_button {
+  .black-button {
     @apply inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50;
+  }
+
+  .grey-button {
+    @apply ml-2 rounded-lg py-2 px-5 bg-gray-200 inline-block font-medium;
   }
 
   .cart-item {
     @apply whitespace-nowrap px-6 py-4;
   }
 
+  .input-field {
+    @apply block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2;
+  }
+
+  .nav-item {
+    @apply hover:text-neutral-500 focus:text-neutral-700 dark:bg-neutral-600 lg:py-1;
+  }
 }
 
 .logo-image {
   width: 200px;
   height: inherit;
  }
+
+.cart-item:hover {
+  color: lightgrey;
+  }
