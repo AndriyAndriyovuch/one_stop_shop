@@ -18,6 +18,10 @@
   .nav-item {
     @apply p-0 text-neutral-800 hover:text-neutral-400 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-800 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400;
   }
+
+  .red-pill {
+    @apply absolute bottom-auto left-auto right-8 top-7 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white;
+  }
 }
 
 .logo-image {
