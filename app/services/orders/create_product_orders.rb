@@ -5,6 +5,11 @@ class Orders::CreateProductOrders
   end
 
   def call
-    @products_hash.each { |product_id, amount| @order.product_orders.create(product_id:, amount:) }
+    @products_hash.each do |product_id, amount|
+      product = Product.find(product_id)
+      amount = amount < product.balance ? amount : product.balance
+
+      @order.product_orders.create(product_id:, amount:)
+    end
   end
 end

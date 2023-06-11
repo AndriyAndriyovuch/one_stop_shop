@@ -11,16 +11,12 @@
     @apply ml-2 rounded-lg py-2 px-5 bg-gray-200 inline-block font-medium;
   }
 
-  .cart-item {
-    @apply whitespace-nowrap px-6 py-4;
-  }
-
   .input-field {
     @apply block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2;
   }
 
   .nav-item {
-    @apply hover:text-neutral-500 focus:text-neutral-700 dark:bg-neutral-600 lg:py-1;
+    @apply p-0 text-neutral-800 hover:text-neutral-400 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-800 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400;
   }
 }
 
@@ -28,7 +24,3 @@
   width: 200px;
   height: inherit;
  }
-
-.cart-item:hover {
-  color: lightgrey;
-  }
