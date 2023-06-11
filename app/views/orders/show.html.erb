@@ -11,9 +11,7 @@
             <li class="mb-4"><%= @order.address %></li>
             <li class="mb-4"><%= @order.phone %></li>
           </ul>
-
               <table class="min-w-full text-left text-sm font-light">
-
                 <thead class="border-b font-medium dark:border-neutral-500">
                   <tr>
                     <th scope="col" class="px-6 py-4">#</th>
@@ -50,10 +48,10 @@
     </div>
 
 
-    <%= link_to 'Edit this order', edit_order_path(@order), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this order', edit_order_path(@order), class: "grey-button" %>
     <div class="inline-block ml-2">
-      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "grey-button" %>
     </div>
-    <%= link_to 'Back to products', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Back to products', products_path, class: "grey-button" %>
   </div>
 </div>
