@@ -16,9 +16,11 @@
 
                 <thead class="border-b font-medium dark:border-neutral-500">
                   <tr>
-                    <% table_title.each do |item| %>
-                      <th scope="col" class="px-6 py-4"><%= item %></th>
-                    <% end %>
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">Title</th>
+                    <th scope="col" class="px-6 py-4">Price</th>
+                    <th scope="col" class="px-6 py-4">Amount</th>
+                    <th scope="col" class="px-6 py-4">Sum</th>
                   </tr>
                 </thead>
 
@@ -28,15 +30,15 @@
                       <td class="cart-item font-medium"><%= index %></td>
                       <td class="cart-item"><%= product.name %></td>
                       <td class="cart-item"><%= number_to_currency(product.price) %></td>
-                      <td class="cart-item"><%= select_amount(@order, product) %></td>
-                      <td class="cart-item"><%= number_to_currency(order_product_sum(@order, product)) %></td>
+                      <td class="cart-item"><%= @order.product_amount(product) %></td>
+                      <td class="cart-item"><%= number_to_currency(@order.product_sum(product)) %></td>
                     </tr>
                   <% end %>
                   <tr class="border-b dark:border-neutral-500">
                     <td colspan="4" class="whitespace-nowrap px-6 py-2">
                       Total sum
                     </td>
-                    <td class="whitespace-nowrap px-6 py-2"><%= number_to_currency(order_total_sum(@order)) %></td>
+                    <td class="whitespace-nowrap px-6 py-2"><%= number_to_currency(@order.total_sum) %></td>
                   </tr>
 
                 </tbody>

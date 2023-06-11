@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    redirect_to products_path unless session[:products]
     @order = Order.new
   end
 
