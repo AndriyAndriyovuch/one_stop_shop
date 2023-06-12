@@ -28,19 +28,23 @@ class CartController < ApplicationController
   private
 
   def modify_product
-    case params[:update_action]
+    case cart_params[:update_action]
 
     when 'buy'
-      Cart::Session.new(session, params).add_product
+      Cart::Session.new(session, cart_params).add_product
       redirect_to products_path, notice: "Product was added to cart."
 
     when 'change'
-      Cart::Session.new(session, params).set_new_amount
+      Cart::Session.new(session, cart_params).set_new_amount
       redirect_to cart_path, notice: "Amount was changed"
 
     when 'delete'
-      Cart::Session.new(session, params).delete_product
-      redirect_to cart_path, notice: "Product was removed"
+      Cart::Session.new(session, cart_params).delete_product
+      redirect_to cart_path, notice: "Product was removed" if session[:products].present?
     end
+  end
+
+  def cart_params
+    params.permit(:id, :amount, :update_action)
   end
 end
