@@ -24,7 +24,7 @@
                     </td>
                     <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(session_product_sum(product)) %></td>
                     <td class="whitespace-nowrap px-6 py-4">
-                      <%= button_to cancel_shipping_path(update_action: 'delete', product_id: product.id) do %>
+                      <%= button_to cancel_shipping_path(product, update_action: 'delete') do %>
                           <i class="fa fa-regular fa-trash fa-2x"></i>
                       <% end %>
                     </td>

@@ -38,7 +38,7 @@ class Cart::Session
   end
 
   def delete_product
-    current_session[:products].delete(params[:product_id])
+    current_session[:products].delete(params[:id])
     current_session[:products]
   end
 
@@ -46,7 +46,7 @@ class Cart::Session
 
   def set_product
     @product = {
-      id: params[:product_id],
+      id: params[:id],
       amount: params[:amount].to_i
     }
 
