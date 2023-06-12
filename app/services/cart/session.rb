@@ -1,4 +1,4 @@
-class Session
+class Cart::Session
   attr_reader :current_session, :params
 
   def initialize(current_session, params = {})
@@ -37,8 +37,8 @@ class Session
     current_session[:products]
   end
 
-  def delete_product(product_id)
-    current_session[:products].delete(product_id)
+  def delete_product
+    current_session[:products].delete(params[:product_id])
     current_session[:products]
   end
 

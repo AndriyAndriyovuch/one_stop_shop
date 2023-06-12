@@ -20,11 +20,11 @@
                     <td class="whitespace-nowrap px-6 py-4"><%= product.name %></td>
                     <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(product.price) %></td>
                     <td class="whitespace-nowrap px-6 py-4">
-                      <%= render "orders/change_amount_form", product: product %>
+                      <%= render "cart/change_amount_form", product: product %>
                     </td>
                     <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(session_product_sum(product)) %></td>
                     <td class="whitespace-nowrap px-6 py-4">
-                      <%= button_to cancel_shipping_path(product), method: :delete do %>
+                      <%= button_to cancel_shipping_path(update_action: 'delete', product_id: product.id) do %>
                           <i class="fa fa-regular fa-trash fa-2x"></i>
                       <% end %>
                     </td>
@@ -39,8 +39,14 @@
               </tbody>
           </table>
 
-          <div class="m-5">
-              <%= link_to 'Pay this order', new_order_path, class: "black-button" %>
+          <div>
+            <div class="inline-block m-5">
+                <%= link_to 'Pay this order', new_order_path, class: "black-button" %>
+            </div>
+
+            <div class="inline-block float-right m-5">
+              <%= button_to 'Delete all products', clean_cart_path, method: :delete, class: "grey-button ms-0" %>
+            </div>
           </div>
         <% else %>
             <div class="grid h-screen place-items-center text-3xl">Your cart is empty yet</div>
