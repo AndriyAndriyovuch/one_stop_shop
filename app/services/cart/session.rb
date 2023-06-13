@@ -1,5 +1,5 @@
 class Cart::Session
-  attr_reader :current_session, :params
+  attr_reader :current_session, :params, :product, :product_balance
 
   def initialize(current_session, params = {})
     @current_session = current_session
@@ -17,14 +17,14 @@ class Cart::Session
   def add_product
     set_product
 
-    if current_session[:products].has_key?(@product[:id])
+    if current_session[:products].has_key?(product[:id])
       if amount_greater_balance?
-        current_session[:products][@product[:id]] = @product_balance
+        current_session[:products][product[:id]] = product_balance
       else
-        current_session[:products][@product[:id]] += @product[:amount]
+        current_session[:products][product[:id]] += product[:amount]
       end
     else
-      @current_session[:products].merge!(@product[:id] => @product[:amount])
+      @current_session[:products].merge!(product[:id] => product[:amount])
     end
 
     current_session[:products]
@@ -33,7 +33,7 @@ class Cart::Session
   def set_new_amount
     set_product
 
-    current_session[:products][@product[:id]] = @product[:amount]
+    current_session[:products][product[:id]] = product[:amount]
     current_session[:products]
   end
 
@@ -50,13 +50,13 @@ class Cart::Session
       amount: params[:amount].to_i
     }
 
-    @product_balance = Product.find(@product[:id].to_i).balance
+    @product_balance = Product.find(product[:id].to_i).balance
 
-    @product[:amount] = 1 if @product[:amount].blank? || @product[:amount] <= 0
-    @product[:amount] = @product_balance if @product_balance < @product[:amount]
+    product[:amount] = 1 if product[:amount].blank? || product[:amount] <= 0
+    product[:amount] = product_balance if product_balance < product[:amount]
   end
 
   def amount_greater_balance?
-    @product_balance < (@product[:amount] + current_session[:products][@product[:id]])
+    product_balance < (product[:amount] + current_session[:products][product[:id]])
   end
 end
