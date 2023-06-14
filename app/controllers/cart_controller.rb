@@ -2,8 +2,8 @@ class CartController < ApplicationController
   def show
     return unless session[:products]
 
-    @session_products = call_session.products
-    @session_sum = call_session.sum
+    @session_products = Cart::Session.call(session, params)[:products]
+    @session_sum = Cart::Session.call(session, params)[:sum]
   end
 
   def create
@@ -30,24 +30,20 @@ class CartController < ApplicationController
     case cart_params[:update_action]
 
     when 'buy'
-      call_session.add_product
+      Cart::AddProduct.call(session, params)
       redirect_to products_path, notice: "Product was added to cart."
 
     when 'change'
-      call_session.set_new_amount
+      Cart::UpdateAmount.call(session, params)
       redirect_to cart_path, notice: "Amount was changed"
 
     when 'delete'
-      call_session.delete_product
+      Cart::RemoveProduct.call(session, params)
       redirect_to cart_path, notice: "Product was removed" if session[:products].present?
     end
   end
 
   def cart_params
     params.permit(:id, :amount, :update_action)
-  end
-
-  def call_session
-    Cart::Session.new(session, cart_params)
   end
 end
