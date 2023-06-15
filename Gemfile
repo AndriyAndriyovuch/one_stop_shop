@@ -26,6 +26,8 @@ group :development, :test do
   gem "rspec-rails", ">= 6.0.0"
   gem "shoulda-matchers", "~> 5.0"
   gem "rails-controller-testing"
+  gem 'capybara'
+  gem 'rspec-example_steps'
 end
 
 group :development do
