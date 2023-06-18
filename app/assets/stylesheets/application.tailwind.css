@@ -11,6 +11,10 @@
     @apply inline-block rounded bg-neutral-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black hover:cursor-pointer;
   }
 
+  .red-button {
+    @apply inline-block rounded bg-red-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black hover:cursor-pointer;
+  }
+
   .input-field {
     @apply block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2;
   }
