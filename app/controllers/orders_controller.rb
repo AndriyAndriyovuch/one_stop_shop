@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.customer = current_user if user_signed_in?
 
     if @order.save
       Orders::CreateProductOrders.new(session[:products], @order).call
