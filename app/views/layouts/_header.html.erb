@@ -8,8 +8,14 @@
 
     <div class="flex items-center ml-auto">
       <% if user_signed_in? %>
-        <p class="me-5"><%= full_name(current_user) %></p>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "black-button  me-5" %>
+        <div class="dropdown inline-block relative">
+          <p class="me-5"><%= full_name(current_user) %></p>
+          <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+            <li><%= button_to "Show my orders", orders_path, method: :get, class: "dropdown-custom-item" %></li>
+            <li><%= button_to "Edit my account", edit_user_registration_path, method: :get, class: "dropdown-custom-item" %></li>
+            <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-custom-item" %></li>
+          </ul>
+        </div>
       <% else %>
         <%= link_to "Sign in", new_user_session_path, class: "grey-button me-3" %>
         <%= link_to "Register", new_user_registration_path, class: "black-button me-5" %>

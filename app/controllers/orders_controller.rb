@@ -1,4 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :check_signed_in, only: %i[ index ]
+
+  def index
+    @orders = current_user.orders
+  end
+
   def show
     @order = resourse
   end
@@ -56,5 +62,9 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
+  end
+
+  def check_signed_in
+    redirect_to new_user_session_path unless user_signed_in?
   end
 end
