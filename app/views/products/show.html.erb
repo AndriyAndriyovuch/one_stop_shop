@@ -20,7 +20,7 @@
 
     <div class="relative mb-3">
       <% if @product.balance.positive? %>
-        <%= render "products/buy_form", product: @product %>
+        <%= render "cart/buy_form", product: @product %>
       <% end %>
     </div>
 
