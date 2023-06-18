@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
 
+  belongs_to :customer, class_name: 'User', foreign_key: :customer_id
+
   validates :first_name, :last_name, :address, :phone, presence: true
 
   def product_sum(product)
