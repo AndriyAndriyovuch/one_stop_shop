@@ -1,16 +1,10 @@
-class Cart::Session < ApplicationService
+class Cart::Storage
   attr_reader :current_session, :params
 
   def initialize(current_session, params = {})
     @current_session = current_session
     @params = params
   end
-
-  def call
-    { products:, sum: }
-  end
-
-  private
 
   def products
     current_session[:products].keys.map { |id| Product.find(id) }

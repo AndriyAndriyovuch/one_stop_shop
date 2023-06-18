@@ -2,8 +2,10 @@ class CartController < ApplicationController
   def show
     return unless session[:products]
 
-    @session_products = Cart::Session.call(session, params)[:products]
-    @session_sum = Cart::Session.call(session, params)[:sum]
+    cart = Cart::Storage.new(session, params)
+
+    @session_products = cart.products
+    @session_sum = cart.sum
   end
 
   def create
@@ -14,8 +16,6 @@ class CartController < ApplicationController
     create unless session[:products].present?
 
     modify_product
-
-    delete if session[:products].empty?
   end
 
   def delete
@@ -39,7 +39,9 @@ class CartController < ApplicationController
 
     when 'delete'
       Cart::RemoveProduct.call(session, params)
-      redirect_to cart_path, notice: "Product was removed" if session[:products].present?
+      
+      redirect_to cart_path, notice: "Product was removed" and return if session[:products].present?
+      delete if session[:products].empty?
     end
   end
 
