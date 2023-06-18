@@ -6,6 +6,15 @@
       <%= link_to 'Products', products_path, class: "nav-item" %>
     </div>
 
+    <div class="flex items-center ml-auto">
+      <% if user_signed_in? %>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "black-button  me-5" %>
+      <% else %>
+        <%= link_to "Sign in", new_user_session_path, class: "grey-button  me-3" %>
+        <%= link_to "Register", new_user_registration_path, class: "black-button me-5" %>
+      <% end %>
+    </div>
+
     <%= link_to cart_path do %>
       <i class="fa fa-solid fa-cart-shopping fa-2x nav-item me-5"></i>
       <div class="red-pill"><%= count_products %></div>

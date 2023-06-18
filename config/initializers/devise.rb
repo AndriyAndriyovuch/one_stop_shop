@@ -17,13 +17,11 @@ Devise.setup do |config|
 
   config.expire_all_remember_me_on_sign_out = true
 
-  config.password_length = 6..128
+  config.password_length = 8..128
   config.reset_password_within = 6.hours
 
   config.sign_out_via = :delete
 
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
-
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
