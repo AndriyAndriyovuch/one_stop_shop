@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-  include Shopping
-
   def index
     @products = collection.order(:name)
   end
