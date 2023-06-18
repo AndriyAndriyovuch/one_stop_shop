@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :check_signed_in, only: %i[ index ]
+  before_action :check_signed_in, only: %i[index]
 
   def index
     @orders = current_user.orders

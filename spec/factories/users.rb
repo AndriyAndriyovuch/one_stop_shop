@@ -23,11 +23,18 @@ require 'faker'
 
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.email  }
+    email { Faker::Internet.email }
     password { 'verystrongpassword' }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     address { Faker::Address.full_address }
     phone { Faker::PhoneNumber.cell_phone }
+  end
+
+  trait :invalid_user do
+    email { nil }
+    password { 'qwerty' }
+    first_name { nil }
+    last_name { nil }
   end
 end

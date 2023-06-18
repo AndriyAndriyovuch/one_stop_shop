@@ -26,5 +26,4 @@ class Cart::UpdateAmount < ApplicationService
     product[:amount] = 1 if product[:amount].blank? || product[:amount] <= 0
     product[:amount] = product_balance if product_balance < product[:amount]
   end
-
 end

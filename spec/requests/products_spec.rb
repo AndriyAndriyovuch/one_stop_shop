@@ -18,7 +18,7 @@ RSpec.describe "/products", type: :request do
 
   let(:new_attributes) { { product: attributes_for(:product) } }
   let(:valid_attributes) { { product: attributes_for(:product) } }
-  let(:invalid_attributes) { { product: attributes_for(:product, :invalid) } }
+  let(:invalid_attributes) { { product: attributes_for(:product, :invalid_product) } }
 
   describe "GET /index" do
     it "renders a successful response" do

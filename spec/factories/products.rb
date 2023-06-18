@@ -22,7 +22,7 @@ FactoryBot.define do
     balance { rand(20..60) }
   end
 
-  trait :invalid do
+  trait :invalid_product do
     name { nil }
     description { nil }
     price { -1 }
