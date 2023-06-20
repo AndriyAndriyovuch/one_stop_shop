@@ -6,11 +6,7 @@ class OrdersController < ApplicationController
   def new
     redirect_to products_path unless session[:products].present?
 
-    cart = Cart::Storage.new(session, params)
-
-    @session_products = cart.products
-    @session_sum = cart.sum
-
+    set_products
     @order = Order.new
   end
 
@@ -26,6 +22,7 @@ class OrdersController < ApplicationController
 
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
+      set_products
       render :new, status: :unprocessable_entity
     end
   end
@@ -59,5 +56,12 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
+  end
+
+  def set_products
+    cart = Cart::Storage.new(session, params)
+
+    @session_products = cart.products
+    @session_sum = cart.sum
   end
 end
