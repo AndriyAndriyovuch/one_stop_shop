@@ -16,10 +16,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      Orders::CreateProductOrders.new(session[:products], @order).call
-      Products::SubtractBalance.new(@order).call
+      Orders::Manager.new(session[:products], @order, session).call
 
-      session.delete(:products)
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
       render :new, status: :unprocessable_entity
