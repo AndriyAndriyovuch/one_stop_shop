@@ -26,14 +26,15 @@ class Orders::Manager
 
   def substract_balance
     order.products.each do |product|
-      command = "UPDATE products SET balance = balance - (
+      ActiveRecord::Base.connection.execute(
+        "UPDATE products SET balance = balance - (
           SELECT amount
           FROM product_orders
           WHERE product_orders.order_id = #{order.id}
           AND product_orders.product_id = #{product.id}
         )
         WHERE id = #{product.id};"
-      ActiveRecord::Base.connection.execute(command)
+        )
     end
   end
 
