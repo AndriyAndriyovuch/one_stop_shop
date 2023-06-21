@@ -1,16 +1,16 @@
 class Cart::Storage
-  attr_reader :current_session, :params
+  attr_reader :session, :params
 
-  def initialize(current_session, params = {})
-    @current_session = current_session
+  def initialize(session, params = {})
+    @session = session
     @params = params
   end
 
   def products
-    current_session[:products].keys.map { |id| Product.find(id) }
+    Product.find(session[:products].keys)
   end
 
   def sum
-    products.map { |product| current_session[:products][product.id.to_s] * product.price }.sum
+    products.map { |product| session[:products][product.id.to_s] * product.price }.sum
   end
 end

@@ -7,7 +7,7 @@
             <div class="block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-300">
               <ul class="ms-6 w-96">
                 <h1 class="font-bold text-3xl mb-5">Order №<%= @order.id %></h1>
-            <li class="mb-4"><%= full_name(@order) %></li>
+            <li class="mb-4"><%= @order.full_name %></li>
             <li class="mb-4"><%= @order.address %></li>
             <li class="mb-4"><%= @order.phone %></li>
           </ul>

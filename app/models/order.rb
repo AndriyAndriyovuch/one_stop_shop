@@ -15,4 +15,8 @@ class Order < ApplicationRecord
   def total_sum
     product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

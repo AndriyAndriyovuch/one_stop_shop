@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = collection.ordered_by_name
+    @products = collection
   end
 
   def show
@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   private
 
   def collection
-    Product.all
+    Product.all.ordered
   end
 
   def resourse

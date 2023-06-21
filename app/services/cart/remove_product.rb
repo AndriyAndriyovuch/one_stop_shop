@@ -1,13 +1,12 @@
-class Cart::RemoveProduct < ApplicationService
-  attr_reader :current_session, :params, :product, :product_balance
+class Cart::RemoveProduct < BaseService
+  attr_reader :session, :params
 
-  def initialize(current_session, params = {})
-    @current_session = current_session
+  def initialize(session, params = {})
+    @session = session
     @params = params
   end
 
   def call
-    current_session[:products].delete(params[:id])
-    current_session[:products]
+    session[:products].delete(params[:id])
   end
 end

@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :check_cart, only: %i[new]
+
   def show
     @order = resourse
   end
 
   def new
-    redirect_to products_path unless session[:products].present?
-
     set_products
+
     @order = Order.new
   end
 
@@ -41,7 +42,7 @@ class OrdersController < ApplicationController
     @order = resourse
 
     @order.destroy
-    redirect_to orders_url, notice: "Order was successfully destroyed."
+    redirect_to root_path, notice: "Order was successfully destroyed."
   end
 
   private
@@ -63,5 +64,9 @@ class OrdersController < ApplicationController
 
     @session_products = cart.products
     @session_sum = cart.sum
+  end
+
+  def check_cart
+    redirect_to root_path unless session[:products].present?
   end
 end

@@ -1,44 +1,28 @@
 class Orders::Manager
-  attr_reader :products_hash, :order, :current_session
+  attr_reader :products_hash, :order, :session
 
-  def initialize(products_hash, order, current_session)
+  def initialize(products_hash, order, session)
     @products_hash = products_hash
     @order = order
-    @current_session = current_session
+    @session = session
   end
 
   def call
-    create_relations
-    substract_balance
-    clean_cart
-  end
-
-  private
-
-  def create_relations
+    # create relations
     products_hash.each do |product_id, amount|
       product = Product.find(product_id)
       amount = [amount, product.balance].min
 
       order.product_orders.create(product_id:, amount:)
     end
-  end
 
-  def substract_balance
+    # substract balance
     order.products.each do |product|
-      ActiveRecord::Base.connection.execute(
-        "UPDATE products SET balance = balance - (
-          SELECT amount
-          FROM product_orders
-          WHERE product_orders.order_id = #{order.id}
-          AND product_orders.product_id = #{product.id}
-        )
-        WHERE id = #{product.id};"
-        )
+      new_balance = product.balance - order.product_orders.find_by(product_id: product.id).amount
+      product.update(balance: new_balance)
     end
+  
+    # clean cart
+    session.delete(:products)
   end
-
-  def clean_cart
-    current_session.delete(:products)
-  end 
 end
