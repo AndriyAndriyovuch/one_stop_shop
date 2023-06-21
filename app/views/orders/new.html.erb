@@ -25,7 +25,7 @@
         </tr>
       <% end %>
       <tr class="border-b dark:border-neutral-500">
-        <td colspan="4" class="whitespace-nowrap px-6 py-2">
+        <td colspan="3" class="whitespace-nowrap px-6 py-2">
           Total sum
         </td>
         <td class="whitespace-nowrap px-6 py-2"><%= number_to_currency(@session_sum) %></td>
@@ -33,5 +33,5 @@
     </tbody>
   </table>
 
-  <%= link_to 'Back to cart', cart_path, class: "grey-button mt-5 mb-5" %>
+  <%= link_to 'Back to cart', cart_path, class: "btn-grey mt-5 mb-5" %>
 </div>

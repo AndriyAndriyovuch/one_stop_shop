@@ -14,7 +14,7 @@
   </head>
 
   <body class="flex flex-col min-h-screen">
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/header', products_count: @products_count %>
     <%= render "shared/notice" %>
 
     <div class="flex-grow">
