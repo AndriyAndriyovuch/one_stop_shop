@@ -8,7 +8,7 @@
   <table class="min-w-full text-left text-sm font-light">
     <thead class="border-b font-medium dark:border-neutral-500">
       <tr>
-        <th scope="col" class="px-6 py-4">#</th>
+
         <th scope="col" class="px-6 py-4">Title</th>
         <th scope="col" class="px-6 py-4">Price</th>
         <th scope="col" class="px-6 py-4">Amount</th>
@@ -16,13 +16,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @session_products.each.with_index(1) do |product, index| %>
+      <% @session_products.each do |product| %>
         <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-          <td class="whitespace-nowrap px-6 py-4 font-medium"><%= index %></td>
-          <td class="whitespace-nowrap px-6 py-4"><%= product.name %></td>
-          <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(product.price) %></td>
-          <td class="whitespace-nowrap px-6 py-4"><%= session.dig(:products, product.id.to_s) %></td>
-          <td class="whitespace-nowrap px-6 py-4"><%= number_to_currency(session_product_sum(product)) %></td>
+          <td class="table-item"><%= product.name %></td>
+          <td class="table-item"><%= number_to_currency(product.price) %></td>
+          <td class="table-item"><%= session.dig(:products, product.id.to_s) %></td>
+          <td class="table-item"><%= number_to_currency(session_product_sum(product)) %></td>
         </tr>
       <% end %>
       <tr class="border-b dark:border-neutral-500">

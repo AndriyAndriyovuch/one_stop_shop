@@ -10,11 +10,9 @@ class Cart::AddProduct < BaseService
     set_product
 
     if session[:products].key?(product[:id])
-      if amount_greater_balance?
-        session[:products][product[:id]] = product_balance
-      else
-        session[:products][product[:id]] += product[:amount]
-      end
+      new_amount = amount_greater_balance? ? product_balance : product[:amount]
+
+      session[:products][product[:id]] = new_amount
     else
       @session[:products].merge!(product[:id] => product[:amount])
     end

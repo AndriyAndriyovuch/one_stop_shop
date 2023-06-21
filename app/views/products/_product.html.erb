@@ -12,7 +12,7 @@
         </div>
 
         <div>
-          Price: <%= number_to_currency(product.price, precision: 2) %>
+          Price: <%= number_to_currency(product.price) %>
         </div>
 
         <div>
@@ -27,6 +27,8 @@
       <div class="relative mb-3">
         <% if product.balance.positive? %>
           <%= render "cart/buy_form", product: product %>
+        <% else %>
+          <p class="text-3xl text-red-500">Out of stock</p>
         <% end %>
       </div>
     </div>
