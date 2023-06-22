@@ -18,7 +18,7 @@ class Orders::Manager
       new_balance = product.balance - order.product_orders.find_by(product_id: product.id).amount
       product.update(balance: new_balance)
     end
-  
+
     # clean cart
     session.delete(:products)
   end

@@ -11,7 +11,9 @@ class Cart::Storage
   end
 
   def sum
-    products.map { |product| session[:products][product.id.to_s] * product.price }.sum
+    Product
+      .find(session[:products].keys)
+      .sum { |product| product.price * session[:products][product.id.to_s] }
   end
 
   def count_products
