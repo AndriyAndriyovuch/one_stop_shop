@@ -29,8 +29,8 @@ class Cart::Update < BaseService
   def add_product
     set_product
 
-    if session[:products].key?(product[:id])
-      new_amount = amount_greater_balance? ? product_balance : product[:amount]
+    if session[:products].has_key?(product[:id])
+      new_amount = amount_greater_balance? ? product_balance : (product[:amount] + session.dig(:products, product[:id]))
 
       session[:products][product[:id]] = new_amount
     else
@@ -59,6 +59,8 @@ class Cart::Update < BaseService
 
     product[:amount] = 1 if product[:amount].blank? || product[:amount] <= 0
     product[:amount] = product_balance if product_balance < product[:amount]
+
+    product
   end
 
   def amount_greater_balance?
