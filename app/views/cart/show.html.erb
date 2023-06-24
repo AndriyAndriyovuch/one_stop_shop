@@ -22,7 +22,7 @@
                     </td>
                     <td class="table-item"><%= number_to_currency(session_product_sum(product)) %></td>
                     <td class="table-item">
-                      <%= button_to  cancel_shipping_product_path(product, update_action: 'delete') do %>
+                      <%= button_to  remove_product_to_cart_path(product, action_type: 'remove_product') do %>
                           <i class="fa fa-regular fa-trash fa-2x"></i>
                       <% end %>
                     </td>
