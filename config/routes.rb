@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "products#index"
 
+  get "pay", to:"payments#create", as:"pay"
+
   resources :cart, only: [:index, :destroy]
 
 
