@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
   before_action :check_cart, only: [:new]
+  before_action :set_products, only: [:new, :create]
 
   def show
     @order = resourse
   end
 
   def new
-    set_products
-
     @order = Order.new
   end
 
@@ -15,11 +14,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      Orders::Manager.new(session[:products], @order, session).call
+      Orders::Manager.new(@order, session).call
 
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
-      set_products
       render :new, status: :unprocessable_entity
     end
   end
@@ -35,10 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def set_products
-    cart = Cart::Storage.new(session, params)
-
-    @session_products = cart.realize_products
-    @session_sum = cart.sum
+    @cart = Cart::Storage.new(session, params)
   end
 
   def check_cart

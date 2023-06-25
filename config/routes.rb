@@ -15,5 +15,4 @@ Rails.application.routes.draw do
   end
 
   resources :orders
-
 end

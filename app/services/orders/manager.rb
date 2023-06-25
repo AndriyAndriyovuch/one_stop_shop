@@ -1,17 +1,23 @@
 class Orders::Manager
   attr_reader :products_hash, :order, :session
 
-  def initialize(products_hash, order, session)
-    @products_hash = products_hash
+  def initialize(order, session)
     @order = order
     @session = session
   end
 
   def call
     # create relations
-    products_hash.each do |product_id, amount|
-      order.product_orders.create(product_id:, amount: [amount, Product.find(product_id).balance].min)
+    products_collection = Product.find(session[:products].keys)
+
+    products = session[:products].map do |product_id, amount|
+      balance = products_collection.find{ |product| id = product_id }.balance
+      amount = [amount, balance].min
+
+      {product_id: , amount: }
     end
+
+    order.product_orders.insert_all(products)
 
     # substract balance
     order.products.each do |product|

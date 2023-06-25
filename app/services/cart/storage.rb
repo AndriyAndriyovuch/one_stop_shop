@@ -6,7 +6,7 @@ class Cart::Storage
     @params = params
   end
 
-  def realize_products
+  def realized_products
     Product.find(session[:products].keys)
   end
 
@@ -20,5 +20,9 @@ class Cart::Storage
     return 0 if session[:products].blank?
 
     session[:products].count
+  end
+
+  def product_sum(product)
+    session.dig(:products, product.id.to_s) * product.price
   end
 end
