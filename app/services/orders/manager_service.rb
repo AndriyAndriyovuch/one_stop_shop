@@ -1,4 +1,4 @@
-class Orders::Manager
+class Orders::ManagerService
   attr_reader :products_hash, :order, :session
 
   def initialize(order, session)
@@ -11,7 +11,7 @@ class Orders::Manager
     products_collection = Product.find(session[:products].keys)
 
     products = session[:products].map do |product_id, amount|
-      balance = products_collection.find{ |product| id = product_id }.balance
+      balance = products_collection.find { product_id }.balance
       amount = [amount, balance].min
 
       { product_id:, amount: }

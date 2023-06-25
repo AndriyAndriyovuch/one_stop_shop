@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      Orders::Manager.new(@order, session).call
+      Orders::ManagerService.new(@order, session).call
 
       redirect_to order_path(@order), notice: "Order was successfully created."
     else

@@ -6,7 +6,7 @@ RSpec.describe "Cart", type: :request do
 
   describe "GET /cart" do
     it "renders the cart page" do
-      get cart_path
+      get cart_index_path
 
       expect(response).to be_successful
     end
@@ -16,7 +16,7 @@ RSpec.describe "Cart", type: :request do
     it "adds the product to the cart" do
       post add_product_in_cart_path(product)
 
-      expect(session[:products][product.id.to_s]).to be_present
+      expect(session.dig(:products, product.id.to_s)).to be_present
     end
 
     it "redirects back to the previous page" do
@@ -31,7 +31,7 @@ RSpec.describe "Cart", type: :request do
 
     it "updates the product amount in the cart" do
       post update_amount_product_in_cart_path(product), params: { amount: }
-      expect(session[:products][product.id.to_s]).to eq(amount)
+      expect(session.dig(:products, product.id.to_s)).to eq(amount)
     end
 
     it "redirects back to the previous page" do
@@ -56,13 +56,13 @@ RSpec.describe "Cart", type: :request do
 
   describe "DELETE /clean_cart" do
     it "clears the cart" do
-      delete clean_cart_path
+      delete cart_path(1)
 
       expect(session[:products]).to be_nil
     end
 
     it "redirects to the products page" do
-      delete clean_cart_path
+      delete cart_path(1)
 
       expect(response).to redirect_to(products_path)
     end

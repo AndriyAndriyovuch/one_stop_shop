@@ -25,10 +25,10 @@ class Cart::ManagerService
     # set product if amount greater than balance
     params[:amount] = balance if balance < params[:amount].to_i
 
-    product = {
+    {
       id: params[:id],
       amount: params[:amount].to_i,
-      balance: balance
+      balance:
     }
   end
 end

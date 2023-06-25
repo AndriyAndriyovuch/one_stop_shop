@@ -9,7 +9,7 @@ class CartController < ApplicationController
     service = Cart::ManagerService.new(session, cart_params)
     service.call
 
-    redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type].to_s}")
+    redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type]}")
   end
 
   def destroy
