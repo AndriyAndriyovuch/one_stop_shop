@@ -19,6 +19,8 @@ class Cart::Add < BaseService
 
   def available_amount
     desired_amount = product[:amount] + session.dig(:products, product[:id])
+
+    # check if desired amount isn't greater than balance + already shipped amount
     product[:balance] < desired_amount ? product[:balance] : desired_amount
   end
 end

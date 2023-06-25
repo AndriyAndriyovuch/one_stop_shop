@@ -34,4 +34,12 @@
   .block-shadow {
     @apply shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)];
   }
+
+  #notice {
+    @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block text-center;
+  }
+
+  #alert {
+    @apply py-2 px-3 bg-red-500 mb-5 text-white font-medium rounded-lg inline-block text-center;
+  }
 }

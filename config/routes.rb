@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root "products#index"
 
-  get "cart", to: "cart#show", as: 'cart'
-  delete "clean_cart", to: "cart#destroy", as: "clean_cart"
+  resources :cart, only: [:index, :destroy]
+
 
   resources :products, only: [:index, :show] do
     member do

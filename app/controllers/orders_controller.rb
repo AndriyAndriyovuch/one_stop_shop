@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :check_cart, only: [:new]
-  before_action :set_products, only: [:new, :create]
+  before_action :set_cart, only: [:new, :create]
 
   def show
     @order = resourse
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
   end
 
-  def set_products
+  def set_cart
     @cart = Cart::Storage.new(session, params)
   end
 

@@ -17,15 +17,18 @@ class Cart::ManagerService
   private
 
   def get_product
+    balance = Product.find(params[:id]).balance
+
+    # set value if form send invalid data
+    params[:amount] = 1 if params[:amount].blank?
+
+    # set product if amount greater than balance
+    params[:amount] = balance if balance < params[:amount].to_i
+
     product = {
       id: params[:id],
       amount: params[:amount].to_i,
-      balance: Product.find(params[:id]).balance
+      balance: balance
     }
-
-    product[:amount] = 1 if product[:amount].blank? || product[:amount] <= 0
-    product[:amount] = product[:balance] if product[:balance] < product[:amount]
-
-    product
   end
 end

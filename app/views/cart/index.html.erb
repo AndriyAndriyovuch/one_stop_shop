@@ -43,7 +43,7 @@
             </div>
 
             <div class="inline-block float-right m-5">
-              <%= button_to 'Delete all products', clean_cart_path, method: :delete, class: "btn-grey ms-0" %>
+              <%= button_to 'Delete all products', cart_path(@cart), method: :delete, class: "btn-grey ms-0" %>
             </div>
           </div>
         <% else %>

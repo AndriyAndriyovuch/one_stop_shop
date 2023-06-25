@@ -6,7 +6,7 @@ RSpec.describe "Cart", type: :request do
 
   describe "GET /cart" do
     it "renders the cart page" do
-      getcart_path
+      get cart_path
 
       expect(response).to be_successful
     end

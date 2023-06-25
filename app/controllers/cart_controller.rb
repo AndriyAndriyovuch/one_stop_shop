@@ -1,7 +1,7 @@
 class CartController < ApplicationController
   before_action :initialize_cart, :cart_params_valid?, only: [:update]
 
-  def show
+  def index
     @cart = Cart::Storage.new(session, params)
   end
 
@@ -29,11 +29,11 @@ class CartController < ApplicationController
   end
 
   def cart_params_valid?
-    unless cart_params[:id].present? &&
-           cart_params[:id].to_i.is_a?(Integer) &&
-           cart_params[:action_type].present? &&
-           [:add, :update_amount, :remove].include?(cart_params[:action_type])
-      redirect_back fallback_location: root_path, alert: "Something went wrong" and return
-    end
+    return if cart_params[:id].present? &&
+              cart_params[:id].to_i.is_a?(Integer) &&
+              cart_params[:action_type].present? &&
+              [:add, :update_amount, :remove].include?(cart_params[:action_type])
+
+    redirect_back fallback_location: root_path, alert: "Something went wrong" and return
   end
 end

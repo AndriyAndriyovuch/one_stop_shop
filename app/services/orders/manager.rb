@@ -14,7 +14,7 @@ class Orders::Manager
       balance = products_collection.find{ |product| id = product_id }.balance
       amount = [amount, balance].min
 
-      {product_id: , amount: }
+      { product_id:, amount: }
     end
 
     order.product_orders.insert_all(products)
