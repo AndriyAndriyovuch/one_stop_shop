@@ -1,4 +1,4 @@
-class Cart::RemoveProduct
+class Cart::Remove < BaseService
   attr_reader :session, :product
 
   def initialize(session, product)

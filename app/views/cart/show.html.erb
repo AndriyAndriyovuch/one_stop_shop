@@ -2,7 +2,7 @@
   <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
       <div class="overflow-hidden">
-        <% if session[:products] %>
+        <% if session[:products].present? %>
           <table class="min-w-full text-left text-sm font-light">
             <thead class="border-b font-medium dark:border-neutral-500">
               <tr>
@@ -13,7 +13,7 @@
               </tr>
             </thead>
               <tbody>
-                <% @cart.products.each do |product| %>
+                <% @cart.realize_products.each do |product| %>
                   <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                     <td class="table-item"><%= product.name %></td>
                     <td class="table-item"><%= number_to_currency(product.price) %></td>
@@ -22,7 +22,7 @@
                     </td>
                     <td class="table-item"><%= number_to_currency(session_product_sum(product)) %></td>
                     <td class="table-item">
-                      <%= button_to  remove_product_to_cart_path(product, action_type: 'remove_product') do %>
+                      <%= button_to remove_product_in_cart_path(product) do %>
                           <i class="fa fa-regular fa-trash fa-2x"></i>
                       <% end %>
                     </td>

@@ -1,5 +1,5 @@
 class Cart::ManagerService
-  attr_reader :session, :params, :product
+  attr_reader :session, :params
   attr_accessor :notice
 
   def initialize(session, params)
@@ -8,14 +8,16 @@ class Cart::ManagerService
   end
 
   def call
-    service = "Cart::#{params[:action_type].camelize}".constantize
-    service.new(session, set_product).call
+    service = "Cart::#{params[:action_type].to_s.camelize}".constantize
+    product = get_product
+
+    service.call(session, product)
   end
 
   private
 
-  def set_product
-    @product = {
+  def get_product
+    product = {
       id: params[:id],
       amount: params[:amount].to_i,
       balance: Product.find(params[:id]).balance

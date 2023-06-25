@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_action :count_products
+  before_action :get_products_count
 
   private
 
-  def count_products
+  def get_products_count
     @products_count = Cart::Storage.new(session).count_products
   end
 end

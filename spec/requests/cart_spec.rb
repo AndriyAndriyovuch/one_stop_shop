@@ -14,13 +14,13 @@ RSpec.describe "Cart", type: :request do
 
   describe "POST /products/:id/buy" do
     it "adds the product to the cart" do
-      post add_product_to_cart_path(product, action_type: 'add_product')
+      post add_product_in_cart_path(product)
 
       expect(session[:products][product.id.to_s]).to be_present
     end
 
     it "redirects back to the previous page" do
-      post add_product_to_cart_path(product, action_type: 'add_product')
+      post add_product_in_cart_path(product)
 
       expect(response).to redirect_to(request.referrer || root_path)
     end
@@ -30,25 +30,25 @@ RSpec.describe "Cart", type: :request do
     let(:amount) { 5 }
 
     it "updates the product amount in the cart" do
-      post update_amount_product_to_cart_path(product, action_type: 'update_amount'), params: { amount: }
+      post update_amount_product_in_cart_path(product), params: { amount: }
       expect(session[:products][product.id.to_s]).to eq(amount)
     end
 
     it "redirects back to the previous page" do
-      post update_amount_product_to_cart_path(product, action_type: 'update_amount'), params: { amount: }
+      post update_amount_product_in_cart_path(product), params: { amount: }
       expect(response).to redirect_to(request.referrer || root_path)
     end
   end
 
   describe "POST /products/:id/cancel_shipping" do
     it "removes the product from the cart" do
-      post remove_product_to_cart_path(product, action_type: 'remove_product')
+      post remove_product_in_cart_path(product)
 
       expect(session[:products]).to be_nil
     end
 
     it "redirects back to the previous page" do
-      post remove_product_to_cart_path(product, action_type: 'remove_product')
+      post remove_product_in_cart_path(product)
 
       expect(response).to redirect_to(request.referrer || root_path)
     end

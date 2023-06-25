@@ -6,7 +6,7 @@ class Cart::Storage
     @params = params
   end
 
-  def products
+  def realize_products
     Product.find(session[:products].keys)
   end
 
@@ -17,6 +17,8 @@ class Cart::Storage
   end
 
   def count_products
-    session[:products].present? ? session[:products].count : 0
+    return 0 if session[:products].blank?
+
+    session[:products].count
   end
 end

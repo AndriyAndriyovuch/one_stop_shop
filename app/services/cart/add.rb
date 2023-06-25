@@ -1,4 +1,4 @@
-class Cart::AddProduct
+class Cart::Add < BaseService
   attr_reader :session, :product
   attr_accessor :notice
 
@@ -9,9 +9,7 @@ class Cart::AddProduct
 
   def call
     if session[:products].key?(product[:id])
-      new_amount = amount_greater_balance? ? product[:balance] : (product[:amount] + session.dig(:products, product[:id]))
-
-      session[:products][product[:id]] = new_amount
+      session[:products][product[:id]] = available_amount
     else
       @session[:products].merge!(product[:id] => product[:amount])
     end
@@ -19,7 +17,8 @@ class Cart::AddProduct
 
   private
 
-  def amount_greater_balance?
-    product[:balance] < (product[:amount] + session[:products][product[:id]])
+  def available_amount
+    desired_amount = product[:amount] + session.dig(:products, product[:id])
+    product[:balance] < desired_amount ? product[:balance] : desired_amount
   end
 end

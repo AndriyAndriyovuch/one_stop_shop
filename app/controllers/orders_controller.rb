@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :check_cart, only: %i[new]
+  before_action :check_cart, only: [:new]
 
   def show
     @order = resourse
@@ -26,12 +26,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def collection
-    Order.all
-  end
-
   def resourse
-    collection.find(params[:id])
+    Order.find(params[:id])
   end
 
   def order_params
@@ -41,11 +37,11 @@ class OrdersController < ApplicationController
   def set_products
     cart = Cart::Storage.new(session, params)
 
-    @session_products = cart.products
+    @session_products = cart.realize_products
     @session_sum = cart.sum
   end
 
   def check_cart
-    redirect_to root_path unless session[:products].present?
+    redirect_to root_path if session[:products].blank?
   end
 end

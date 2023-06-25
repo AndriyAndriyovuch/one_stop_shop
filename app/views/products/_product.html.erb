@@ -25,10 +25,10 @@
       <hr class="mt-6">
 
       <div class="relative mb-3">
-        <% if product.balance.positive? %>
-          <%= render "cart/buy_form", product: product %>
-        <% else %>
+        <% if product.balance.zero? %>
           <p class="text-3xl text-grey-400">Out of stock</p>
+        <% else %>
+          <%= render "cart/buy_form", product: product %>
         <% end %>
       </div>
     </div>

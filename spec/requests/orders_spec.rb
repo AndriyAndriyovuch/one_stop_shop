@@ -28,7 +28,7 @@ RSpec.describe 'OrdersController', type: :request do
 
   describe 'GET #new' do
     it 'sets products and initializes a new order' do
-      post add_product_to_cart_path(product, action_type: 'add_product')
+      post add_product_in_cart_path(product)
       get new_order_path
 
       expect(response).to have_http_status(:success)
@@ -42,7 +42,7 @@ RSpec.describe 'OrdersController', type: :request do
   describe 'POST #create' do
     context 'with valid order params' do
       it 'creates a new order, calls Orders::ManagerService, and redirects to order page' do
-        post add_product_to_cart_path(product, action_type: 'add_product')
+        post add_product_in_cart_path(product)
         order_params = attributes_for(:order)
 
         expect(post orders_path, params: { order: order_params }).to change(Order, :count).by(1)
@@ -56,7 +56,7 @@ RSpec.describe 'OrdersController', type: :request do
 
     context 'with invalid order params' do
       it 'renders the new template with unprocessable entity status' do
-        post add_product_to_cart_path(product, action_type: 'add_product')
+        post add_product_in_cart_path(product)
         order_params = attributes_for(:order, first_name: '')
 
         post orders_path, params: { order: order_params }
