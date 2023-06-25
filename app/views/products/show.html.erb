@@ -10,7 +10,7 @@
       </div>
 
       <div>
-        Price: <%= number_to_currency(@product.price) %>
+        Price: <%= number_to_currency(@product.price, unit: "₴ ") %>
       </div>
 
       <div>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="relative mb-3">
-      <% if @product.balance.non_zero? %>
+      <% if @product.balance.nonzero? %>
         <%= render "cart/buy_form", product: @product %>
       <% end %>
     </div>
