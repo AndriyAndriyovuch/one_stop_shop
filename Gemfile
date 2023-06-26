@@ -19,6 +19,7 @@ gem "inline_svg"
 gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
 
 gem "monopay-ruby", "~> 0.1.1"
+gem "pry"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

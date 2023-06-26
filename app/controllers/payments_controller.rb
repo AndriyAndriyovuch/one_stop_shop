@@ -16,11 +16,5 @@ class PaymentsController < ApplicationController
 
   def webhook
     webhook_validator = MonopayRuby::Webhooks::Validator.new(request)
-
-    if webhook_validator.valid?
-      puts 'Yes'
-    else
-      puts 'No'
-    end
   end
 end
