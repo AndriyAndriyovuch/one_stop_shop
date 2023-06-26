@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
     if payment.create(1)
       redirect_to root_path, notice: "Payment succesful"
     else
-      redirect_to root_path, alert: "Something went wrong"
+      redirect_to root_path, alert: "Something went wrong with payment"
     end
   end
 
