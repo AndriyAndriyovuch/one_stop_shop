@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
     )
 
     if payment.create(1)
-      redirect_to root_path, notice: "Payment succesful"
+      redirect_to payment.page_url, allow_other_host: true
     else
       redirect_to root_path, alert: "Something went wrong with payment"
     end
