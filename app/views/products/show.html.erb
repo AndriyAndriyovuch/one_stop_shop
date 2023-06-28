@@ -10,7 +10,7 @@
       </div>
 
       <div>
-        Price: <%= number_to_currency(@product.price, precision: 2) %>
+        Price: <%= number_to_currency(@product.price, unit: "₴ ") %>
       </div>
 
       <div>
@@ -19,21 +19,13 @@
     </div>
 
     <div class="relative mb-3">
-      <% if @product.balance.positive? %>
+      <% if @product.balance.nonzero? %>
         <%= render "cart/buy_form", product: @product %>
       <% end %>
     </div>
 
-    <div class="inline-block ml-2">
-    <%= link_to 'Edit this product', edit_product_path(@product), class: "grey-button" %>
-    </div>
-
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this product', product_path(@product), method: :delete, class: "grey-button" %>
-    </div>
-
-    <div class="inline-block ml-2">
-      <%= link_to 'Back to products', products_path, class: "grey-button" %>
+    <div class="inline-block">
+      <%= link_to 'Back to products', products_path, class: "btn-grey" %>
     </div>
 
   </div>

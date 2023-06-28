@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :check_signed_in, only: %i[index]
+  before_action :check_cart, only: [:new]
+  before_action :set_cart, only: [:new, :create]
 
   def index
     @orders = current_user.orders
@@ -10,12 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    redirect_to products_path unless session[:products]
     @order = Order.new
-  end
-
-  def edit
-    @order = resourse
   end
 
   def create
@@ -23,41 +20,18 @@ class OrdersController < ApplicationController
     @order.customer = current_user if user_signed_in?
 
     if @order.save
-      Orders::CreateProductOrders.new(session[:products], @order).call
-      Products::SubtractBalance.new(@order).call
+      Orders::ManagerService.new(@order, session).call
 
-      session.delete(:products)
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def update
-    @order = resourse
-
-    if @order.update(order_params)
-      redirect_to @order, notice: "Order was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @order = resourse
-
-    @order.destroy
-    redirect_to orders_url, notice: "Order was successfully destroyed."
-  end
-
   private
 
-  def collection
-    Order.all
-  end
-
   def resourse
-    collection.find(params[:id])
+    Order.find(params[:id])
   end
 
   def order_params
@@ -66,5 +40,11 @@ class OrdersController < ApplicationController
 
   def check_signed_in
     redirect_to new_user_session_path unless user_signed_in?
+  def set_cart
+    @cart = Cart::Storage.new(session, params)
+  end
+
+  def check_cart
+    redirect_to root_path if session[:products].blank?
   end
 end

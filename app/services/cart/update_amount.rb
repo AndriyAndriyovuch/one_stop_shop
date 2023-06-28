@@ -1,17 +1,15 @@
-class Cart::UpdateAmount < ApplicationService
-  attr_reader :current_session, :params, :product, :product_balance
+class Cart::UpdateAmount < BaseService
+  attr_reader :session, :product
 
-  def initialize(current_session, params = {})
-    @current_session = current_session
-    @params = params
+  def initialize(session, product)
+    @session = session
+    @product = product
   end
 
   def call
-    set_product
-
-    current_session[:products][product[:id]] = product[:amount]
-    current_session[:products]
+    session[:products][product[:id]] = product[:amount]
   end
+<<<<<<< HEAD
 
   private
 
@@ -26,4 +24,6 @@ class Cart::UpdateAmount < ApplicationService
     product[:amount] = 1 if product[:amount].blank? || product[:amount] <= 0
     product[:amount] = product_balance if product_balance < product[:amount]
   end
+=======
+>>>>>>> add/controllers_views
 end

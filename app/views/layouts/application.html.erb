@@ -14,9 +14,8 @@
   </head>
 
   <body class="flex flex-col min-h-screen">
-    <%= render 'layouts/header' %>
-    <%= render "layouts/notice" %>
-    <%= render "layouts/alert" %>
+    <%= render 'layouts/header', products_count: @products_count %>
+    <%= render "shared/flash" %>
 
     <div class="flex-grow">
       <%= yield %>

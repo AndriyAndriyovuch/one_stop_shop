@@ -1,24 +1,18 @@
 class CartController < ApplicationController
-  def show
-    return unless session[:products]
+  before_action :initialize_cart, :cart_params_valid?, only: [:update]
 
-    cart = Cart::Storage.new(session, params)
-
-    @session_products = cart.products
-    @session_sum = cart.sum
-  end
-
-  def create
-    session[:products] = {}
+  def index
+    @cart = Cart::Storage.new(session, params)
   end
 
   def update
-    create unless session[:products].present?
+    service = Cart::ManagerService.new(session, cart_params)
+    service.call
 
-    modify_product
+    redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type]}")
   end
 
-  def delete
+  def destroy
     session.delete(:products)
 
     redirect_to products_path, notice: "Cart was cleaned"
@@ -26,26 +20,20 @@ class CartController < ApplicationController
 
   private
 
-  def modify_product
-    case cart_params[:update_action]
-
-    when 'buy'
-      Cart::AddProduct.call(session, params)
-      redirect_to products_path, notice: "Product was added to cart."
-
-    when 'change'
-      Cart::UpdateAmount.call(session, params)
-      redirect_to cart_path, notice: "Amount was changed"
-
-    when 'delete'
-      Cart::RemoveProduct.call(session, params)
-      
-      redirect_to cart_path, notice: "Product was removed" and return if session[:products].present?
-      delete if session[:products].empty?
-    end
+  def cart_params
+    params.permit(:id, :amount, :action_type)
   end
 
-  def cart_params
-    params.permit(:id, :amount, :update_action)
+  def initialize_cart
+    session[:products] = {} unless session[:products].present?
+  end
+
+  def cart_params_valid?
+    return if cart_params[:id].present? &&
+              cart_params[:id].to_i.is_a?(Integer) &&
+              cart_params[:action_type].present? &&
+              [:add, :update_amount, :remove].include?(cart_params[:action_type])
+
+    redirect_back fallback_location: root_path, alert: "Something went wrong" and return
   end
 end

@@ -2,12 +2,18 @@ Rails.application.routes.draw do
   devise_for :users
   root "products#index"
 
-  get "cart", to: "cart#show", as: 'cart'
-  post "products/:id/buy", to: "cart#update", as: 'buy'
-  post "products/:id/change_amount", to: "cart#update", as: 'change_amount'
-  post "products/:id/cancel_shipping", to: "cart#update", as:'cancel_shipping'
-  delete "clean_cart", to: "cart#delete", as: "clean_cart"
+  resources :cart, only: [:index, :destroy]
+
+
+  resources :products, only: [:index, :show] do
+    member do
+      resource :cart, only: [:update] do
+        [:add, :remove, :update_amount].each do |action|
+          post action, to: "cart#update", as: "#{action}_product_in", defaults: { action_type: action }
+        end
+      end
+    end
+  end
 
   resources :orders
-  resources :products
 end

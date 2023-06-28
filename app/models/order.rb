@@ -7,7 +7,9 @@ class Order < ApplicationRecord
   validates :first_name, :last_name, :address, :phone, presence: true
 
   def product_sum(product)
-    product_orders.find_by(product:).amount * product.price
+    ProductOrder.joins(:product)
+                .where(order_id: id, products: { id: product.id })
+                .sum('product_orders.amount * products.price')
   end
 
   def product_amount(product)
@@ -15,6 +17,12 @@ class Order < ApplicationRecord
   end
 
   def total_sum
-    product_orders.map { |item| item.amount * Product.find(item.product_id).price }.sum
+    ProductOrder.joins(:product)
+                .where(order_id: id)
+                .sum('product_orders.amount * products.price')
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

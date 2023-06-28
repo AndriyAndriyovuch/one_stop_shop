@@ -18,4 +18,11 @@ FactoryBot.define do
     address { Faker::Address.full_address }
     phone { Faker::PhoneNumber.cell_phone }
   end
+
+  trait :invalid_order do
+    first_name { nil }
+    last_name { nil }
+    address { nil }
+    phone { nil }
+  end
 end
