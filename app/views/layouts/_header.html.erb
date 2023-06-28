@@ -1,4 +1,4 @@
-<nav class="relative flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 text-neutral-200 shadow-lg dark:bg-neutral-600">
+<nav class="relative flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 text-black dark:text-neutral-200 shadow-lg dark:bg-neutral-600">
   <div class="flex w-full flex-wrap items-center justify-between px-3">
     <div class="flex items-center justify-between" id="links">
       <%= link_to inline_svg_tag("logo.svg", class: 'logo-image'), root_path %>
@@ -17,8 +17,8 @@
           </ul>
         </div>
       <% else %>
-        <%= link_to "Sign in", new_user_session_path, class: "grey-button me-3" %>
-        <%= link_to "Register", new_user_registration_path, class: "black-button me-5" %>
+        <%= link_to "Sign in", new_user_session_path, class: "btn-grey me-3" %>
+        <%= link_to "Register", new_user_registration_path, class: "btn-black me-5" %>
       <% end %>
     </div>
 
