@@ -1,6 +1,5 @@
 class Cart::ManagerService
   attr_reader :session, :params
-  attr_accessor :notice
 
   def initialize(session, params)
     @session = session
@@ -8,7 +7,9 @@ class Cart::ManagerService
   end
 
   def call
-    service = "Cart::#{params[:action_type].to_s.camelize}".constantize
+    return if session[:products].nil?
+
+    service = "Cart::#{params[:action_type].to_s.camelize}Service".constantize
     product = get_product
 
     service.call(session, product)

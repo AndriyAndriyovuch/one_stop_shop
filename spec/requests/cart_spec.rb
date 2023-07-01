@@ -12,7 +12,7 @@ RSpec.describe "Cart", type: :request do
     end
   end
 
-  describe "POST /products/:id/buy" do
+  describe "POST #buy" do
     it "adds the product to the cart" do
       post add_product_in_cart_path(product)
 
@@ -26,7 +26,7 @@ RSpec.describe "Cart", type: :request do
     end
   end
 
-  describe "POST /products/:id/change_amount" do
+  describe "POST #change_amount" do
     let(:amount) { 5 }
 
     it "updates the product amount in the cart" do
@@ -40,7 +40,7 @@ RSpec.describe "Cart", type: :request do
     end
   end
 
-  describe "POST /products/:id/cancel_shipping" do
+  describe "POST #cancel_shipping" do
     it "removes the product from the cart" do
       post remove_product_in_cart_path(product)
 

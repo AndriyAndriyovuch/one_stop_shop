@@ -1,4 +1,4 @@
-class Cart::Storage
+class Cart::StorageService
   attr_reader :session, :params
 
   def initialize(session, params = {})

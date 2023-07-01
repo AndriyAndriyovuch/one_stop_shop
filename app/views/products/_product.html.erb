@@ -21,14 +21,14 @@
       </div>
 
 
-      <%= link_to "Show this product", product, class:"btn-black mt-5" %>
+      <%= link_to "Show this product", product, class: "btn-black mt-5" %>
       <hr class="mt-6">
 
       <div class="relative mb-3">
-        <% if product.balance.zero? %>
-          <p class="text-3xl text-grey-400">Out of stock</p>
-        <% else %>
+        <% if product.balance.nonzero? %>
           <%= render "cart/buy_form", product: product %>
+        <% else %>
+          <p class="text-3xl text-grey-400">Out of stock</p>
         <% end %>
       </div>
     </div>

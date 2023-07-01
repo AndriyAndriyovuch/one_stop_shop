@@ -21,6 +21,8 @@
     <div class="relative mb-3">
       <% if @product.balance.nonzero? %>
         <%= render "cart/buy_form", product: @product %>
+      <% else %>
+        <p class="text-3xl text-grey-400 mt-3">Out of stock</p>
       <% end %>
     </div>
 
