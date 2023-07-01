@@ -9,7 +9,7 @@
     <div class="flex items-center ml-auto">
       <% if user_signed_in? %>
         <div class="dropdown inline-block relative">
-          <p class="me-5"><%= full_name(current_user) %></p>
+          <p class="me-5"><%= current_user.full_name %></p>
           <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
             <li><%= button_to "Show my orders", orders_path, method: :get, class: "dropdown-custom-item" %></li>
             <li><%= button_to "Edit my account", edit_user_registration_path, method: :get, class: "dropdown-custom-item" %></li>

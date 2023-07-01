@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :check_signed_in, only: %i[index]
+  before_action :authenticate_user!, only: %i[index]
   before_action :check_cart, only: [:new]
   before_action :set_cart, only: [:new, :create]
 
@@ -36,10 +36,6 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
-  end
-
-  def check_signed_in
-    redirect_to new_user_session_path unless user_signed_in?
   end
 
   def set_cart
