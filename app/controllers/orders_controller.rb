@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def collection
     Order.ordered
   end
