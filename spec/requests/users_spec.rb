@@ -69,7 +69,7 @@ RSpec.describe "/users", type: :request do
     it "creates a new user" do
       expect do
         post user_registration_path,
-        params: { user: valid_attributes[:user] }
+             params: { user: valid_attributes[:user] }
       end.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_path)
@@ -79,7 +79,7 @@ RSpec.describe "/users", type: :request do
     it "doesn't creates a new user with invalid attributes" do
       expect do
         post user_registration_path,
-        params: { user: invalid_attributes[:user] }
+             params: { user: invalid_attributes[:user] }
       end.not_to change(User, :count)
 
       expect(response).to be_unprocessable

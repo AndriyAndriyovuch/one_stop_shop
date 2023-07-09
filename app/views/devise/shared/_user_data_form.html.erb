@@ -3,8 +3,6 @@
                                                                                           label_html: { class: "text-xl" },
                                                                                           hint_html: {class: "text-sm text-neutral-500" }
                                                                                         }) do |f| %>
-  <%= f.error_notification %>
-
 
   <%= f.input :email, required: true, input_html: { autocomplete: "email" }%>
 
@@ -30,8 +28,6 @@
   <%= f.input :address %>
 
   <%= f.input :phone, onkeyup:"passwordConfirmation()", remote: true %>
-
-
 
   <div class="form-actions">
     <%= f.button :submit, action_type == "new" ? "Sign up" : "Update account", class: 'btn-black' %>
