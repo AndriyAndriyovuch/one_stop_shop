@@ -9,9 +9,4 @@ require 'factory_bot_rails'
 
 FactoryBot.create_list(:product, 10)
 
-2.times do
-  products = Product.all.sample
-  order = FactoryBot.create(:order)
-  order.products << products
-  order.save
-end
+FactoryBot.create(:user)

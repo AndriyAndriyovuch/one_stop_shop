@@ -20,7 +20,7 @@
     <div class="flex-grow">
       <%= yield %>
     </div>
-
+    <%= any_login_here if defined?(AnyLogin) %>
     <%= render 'layouts/footer' %>
   </body>
 </html>
