@@ -8,12 +8,20 @@
 
   <%= f.input :email, required: true, input_html: { autocomplete: "email" }%>
 
-  <%= f.input :password,
+  <div data-controller="showpassword">
+      <%= f.input :password,
               required: false,
               hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-              input_html: { autocomplete: "new-password" } %>
+              input_html: { data: { showpassword_target: "input", action: "keyup->showpassword#displayPassword" }} %>
 
-  <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" } %>
+
+      <div data-showpassword-target="outputContainer">
+        <%= f.input :current_password,
+                    hint: "Please type your password to confirm changes",
+                    input_html: { data: { showpassword_target: "outputField"} } %>
+      </div>
+  </div>
 
   <%= f.input :first_name, required: true, id: "first_name" %>
 
@@ -21,13 +29,9 @@
 
   <%= f.input :address %>
 
-  <%= f.input :phone %>
+  <%= f.input :phone, onkeyup:"passwordConfirmation()", remote: true %>
 
-  <% if user_signed_in? %>
-    <%= f.input :current_password,
-                hint: "Please type your password to confirm changes",
-                input_html: { value: current_user.password } %>
-  <% end %>
+
 
   <div class="form-actions">
     <%= f.button :submit, action_type == "new" ? "Sign up" : "Update account", class: 'btn-black' %>
