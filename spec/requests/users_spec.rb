@@ -41,7 +41,8 @@ RSpec.describe "/users", type: :request do
     it "creates a new user session" do
       post user_session_path, params: { user: { email: user.email, password: user.password } }
 
-      expect(response).to have_http_status(303)
+      expect(response).to have_http_status(:redirect)
+      expect(flash[:notice]).to eq('Signed in successfully.')
     end
   end
 
@@ -49,7 +50,9 @@ RSpec.describe "/users", type: :request do
     it "destroys user session" do
       delete destroy_user_session_path
 
-      expect(response).to have_http_status(303)
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq('Signed out successfully.')
     end
   end
 
@@ -59,6 +62,27 @@ RSpec.describe "/users", type: :request do
 
       expect(response).to be_successful
       expect(response).to render_template(:new)
+    end
+  end
+
+  describe "POST /users/sign_up" do
+    it "creates a new user" do
+      expect do
+        post user_registration_path,
+        params: { user: valid_attributes[:user] }
+      end.to change(User, :count).by(1)
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq('Welcome! You have signed up successfully.')
+    end
+
+    it "doesn't creates a new user with invalid attributes" do
+      expect do
+        post user_registration_path,
+        params: { user: invalid_attributes[:user] }
+      end.not_to change(User, :count)
+
+      expect(response).to be_unprocessable
     end
   end
 
