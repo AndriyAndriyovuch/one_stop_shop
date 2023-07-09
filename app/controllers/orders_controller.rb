@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: %i[index]
+  before_action :authenticate_user!, only: [:index]
   before_action :check_cart, only: [:new]
 
   def index
@@ -18,7 +18,6 @@ class OrdersController < ApplicationController
   def create
     @cart = Cart::StorageService.new(session, params)
     @order = Order.new(order_params)
-    @order.customer = current_user if user_signed_in?
 
     if @order.save
       Orders::ManagerService.new(@order, session).call
@@ -40,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:first_name, :last_name, :address, :phone)
+    params.require(:order).permit(:first_name, :last_name, :address, :phone, :customer_id)
   end
 
   def check_cart

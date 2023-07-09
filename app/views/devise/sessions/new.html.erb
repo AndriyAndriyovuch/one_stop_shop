@@ -10,8 +10,6 @@
       <%= f.input :email, input_html: { autocomplete: "email" } %>
       <%= f.input :password, input_html: { autocomplete: "current-password" } %>
 
-      <%= f.input :remember_me, as: :boolean, input_html: { class: 'input-field p-2 me-5'}, label_html: { class: "text-xl pt-3" } if devise_mapping.rememberable? %>
-
       <div class="form-actions">
         <%= f.button :submit, "Log in", class: "btn-black" %>
       </div>

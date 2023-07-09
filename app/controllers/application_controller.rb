@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   private
 
   def get_products_count
