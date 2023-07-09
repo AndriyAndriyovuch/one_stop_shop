@@ -1,4 +1,4 @@
-class Cart::Storage
+class Cart::StorageService
   attr_reader :session, :params
 
   def initialize(session, params = {})
@@ -7,13 +7,13 @@ class Cart::Storage
   end
 
   def realized_products
-    Product.find(session[:products].keys)
+    Product.where(id: session[:products].keys)
   end
 
   def sum
     Product
-      .find(session[:products].keys)
-      .sum { |product| product.price * session[:products][product.id.to_s] }
+      .where(id: session[:products].keys)
+      .sum { |product| product.price * session.dig(:products, product.id.to_s) }
   end
 
   def count_products

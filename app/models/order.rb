@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  scope :ordered, -> { order(created_at: :asc) }
+
   has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
 
@@ -7,9 +9,9 @@ class Order < ApplicationRecord
   validates :first_name, :last_name, :address, :phone, presence: true
 
   def product_sum(product)
-    ProductOrder.joins(:product)
-                .where(order_id: id, products: { id: product.id })
-                .sum('product_orders.amount * products.price')
+    product_orders.joins(:product)
+                  .where(order_id: id, products: { id: product.id })
+                  .sum('product_orders.amount * products.price')
   end
 
   def product_amount(product)
@@ -17,12 +19,12 @@ class Order < ApplicationRecord
   end
 
   def total_sum
-    ProductOrder.joins(:product)
-                .where(order_id: id)
-                .sum('product_orders.amount * products.price')
+    product_orders.joins(:product)
+                  .where(order_id: id)
+                  .sum('product_orders.amount * products.price')
   end
 
-  def full_name
+  def customer_full_name
     "#{first_name} #{last_name}"
   end
 end

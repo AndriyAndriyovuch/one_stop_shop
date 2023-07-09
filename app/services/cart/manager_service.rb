@@ -1,6 +1,5 @@
 class Cart::ManagerService
   attr_reader :session, :params
-  attr_accessor :notice
 
   def initialize(session, params)
     @session = session
@@ -8,7 +7,9 @@ class Cart::ManagerService
   end
 
   def call
-    service = "Cart::#{params[:action_type].to_s.camelize}".constantize
+    return if session[:products].nil?
+
+    service = "Cart::#{params[:action_type].to_s.camelize}Service".constantize
     product = get_product
 
     service.call(session, product)
@@ -17,18 +18,20 @@ class Cart::ManagerService
   private
 
   def get_product
-    balance = Product.find(params[:id]).balance
+    product = Product.find(params[:id])
+
+    return if product.nil?
 
     # set value if form send invalid data
     params[:amount] = 1 if params[:amount].blank?
 
     # set product if amount greater than balance
-    params[:amount] = balance if balance < params[:amount].to_i
+    params[:amount] = product.balance if product.balance < params[:amount].to_i
 
     {
       id: params[:id],
       amount: params[:amount].to_i,
-      balance:
+      balance: product.balance
     }
   end
 end

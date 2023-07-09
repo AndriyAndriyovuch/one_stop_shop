@@ -1,5 +1,5 @@
 class Orders::ManagerService
-  attr_reader :products_hash, :order, :session
+  attr_reader :order, :session
 
   def initialize(order, session)
     @order = order
@@ -7,25 +7,32 @@ class Orders::ManagerService
   end
 
   def call
-    # create relations
-    products_collection = Product.find(session[:products].keys)
-
-    products = session[:products].map do |product_id, amount|
-      balance = products_collection.find { product_id }.balance
-      amount = [amount, balance].min
-
-      { product_id:, amount: }
-    end
-
-    order.product_orders.insert_all(products)
-
-    # substract balance
-    order.products.each do |product|
-      new_balance = product.balance - order.product_orders.find_by(product_id: product.id).amount
-      product.update(balance: new_balance)
-    end
+    create_relations
+    substract_balance
 
     # clean cart
     session.delete(:products)
+  end
+
+  private
+
+  def create_relations
+    products_collection = Product.where(id: session[:products].keys)
+
+    products = products_collection.map do |product|
+      desired_amount = session.dig(:products, product.id.to_s)
+      amount = [desired_amount, product.balance].min
+
+      { product_id: product.id, amount: }
+    end
+
+    order.product_orders.insert_all(products)
+  end
+
+  def substract_balance
+    order.products.each do |product|
+      amount = order.product_orders.find_by(product_id: product.id).amount
+      product.decrement!(:balance, amount)
+    end
   end
 end
