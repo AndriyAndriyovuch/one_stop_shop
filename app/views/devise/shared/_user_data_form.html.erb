@@ -14,11 +14,13 @@
 
       <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" } %>
 
-      <div data-showpassword-target="outputContainer">
-        <%= f.input :current_password,
-                    hint: "Please type your password to confirm changes",
-                    input_html: { data: { showpassword_target: "outputField"} } %>
-      </div>
+      <% if user_signed_in? %>
+        <div data-showpassword-target="outputContainer">
+          <%= f.input :current_password,
+                      hint: "Please type your password to confirm changes",
+                      input_html: { data: { showpassword_target: "outputField"} } %>
+        </div>
+      <% end %>
   </div>
 
   <%= f.input :first_name, required: true, id: "first_name" %>
