@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def get_products_count
-    @products_count = Cart::StorageService.new(session).count_products
+    @products_count = Cart::StorageService.new(session).products_count
   end
 end

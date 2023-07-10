@@ -9,9 +9,10 @@ RSpec.describe "Cart", type: :request do
       get cart_index_path
 
       expect(response).to be_successful
+      expect(response.body).to include("Your cart is empty yet")
     end
 
-    it "renders the cart page wity product" do
+    it "renders the cart page with product" do
       post add_product_in_cart_path(product)
       get cart_index_path
 
@@ -28,9 +29,10 @@ RSpec.describe "Cart", type: :request do
     end
 
     it "redirects back to the previous page" do
-      post add_product_in_cart_path(product)
+      post add_product_in_cart_path(product),
+           headers: { 'HTTP_REFERER' => products_path }
 
-      expect(response).to redirect_to(request.referrer || root_path)
+      expect(response).to redirect_to(products_path)
     end
   end
 
@@ -43,8 +45,11 @@ RSpec.describe "Cart", type: :request do
     end
 
     it "redirects back to the previous page" do
-      post update_amount_product_in_cart_path(product), params: { amount: }
-      expect(response).to redirect_to(request.referrer || root_path)
+      post update_amount_product_in_cart_path(product),
+           params: { amount: },
+           headers: { 'HTTP_REFERER' => cart_index_path }
+
+      expect(response).to redirect_to(cart_index_path)
     end
   end
 
@@ -56,9 +61,10 @@ RSpec.describe "Cart", type: :request do
     end
 
     it "redirects back to the previous page" do
-      post remove_product_in_cart_path(product)
+      post remove_product_in_cart_path(product),
+           headers: { 'HTTP_REFERER' => cart_index_path }
 
-      expect(response).to redirect_to(request.referrer || root_path)
+      expect(response).to redirect_to(cart_index_path)
     end
   end
 

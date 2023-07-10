@@ -16,7 +16,7 @@ class Cart::StorageService
       .sum { |product| product.price * session.dig(:products, product.id.to_s) }
   end
 
-  def count_products
+  def products_count
     return 0 if session[:products].blank?
 
     session[:products].count

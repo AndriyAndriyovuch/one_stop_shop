@@ -46,7 +46,7 @@ RSpec.describe 'OrdersController', type: :request do
 
         expect do
           post orders_path,
-          params: { order: valid_attributes[:order] }
+               params: { order: valid_attributes[:order] }
         end.to change(Order, :count).by(1)
 
         expect(response).to redirect_to(order_path(Order.last))
