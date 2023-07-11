@@ -61,6 +61,7 @@ tmp/
 .DS_Store
 .vscode/
 .rubocop.yml
+.env
 
 /config/master.key
 /config/database.yml

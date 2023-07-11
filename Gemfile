@@ -11,18 +11,20 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false
 gem "foreman"
 
-gem 'font-awesome-rails'
+gem "inline_svg"
+gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "faker"
   gem "factory_bot_rails"
   gem "rspec-rails", ">= 6.0.0"
-  gem 'shoulda-matchers', '~> 5.0'
+  gem "shoulda-matchers", "~> 5.0"
+  gem "rails-controller-testing"
 end
 
 group :development do

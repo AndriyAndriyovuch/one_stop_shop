@@ -1,0 +1,14 @@
+<nav class="relative flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 text-neutral-200 shadow-lg dark:bg-neutral-600 sticky top-0 z-50">
+  <div class="flex w-full flex-wrap items-center justify-between px-3">
+    <div class="flex items-center justify-between" id="links">
+      <%= link_to inline_svg_tag("logo.svg", class: 'logo-image'), root_path %>
+      <hr class="border-r border-neutral-500 mx-4 h-10">
+      <%= link_to 'Products', products_path, class: "nav-item" %>
+    </div>
+
+    <%= link_to cart_index_path do %>
+      <i class="fa fa-solid fa-cart-shopping fa-2x nav-item me-5"></i>
+      <div class="red-pill"><%= products_count %></div>
+    <% end %>
+  </div>
+</nav>
