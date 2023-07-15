@@ -13,7 +13,7 @@ class Cart::StorageService
   def sum
     Product
       .where(id: session[:products].keys)
-      .sum { |product| product.price * session.dig(:products, product.id.to_s) }
+      .sum { |product| product.price * product_amount(product) }
   end
 
   def products_count
@@ -23,6 +23,10 @@ class Cart::StorageService
   end
 
   def product_sum(product)
-    session.dig(:products, product.id.to_s) * product.price
+    product_amount(product) * product.price
+  end
+
+  def product_amount(product)
+    session.dig(:products, product.id.to_s)
   end
 end
