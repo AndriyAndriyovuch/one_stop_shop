@@ -17,7 +17,8 @@ RSpec.describe "Cart", type: :request do
       get cart_index_path
 
       expect(response).to be_successful
-      expect(response.body).to include(product.name)
+      puts product.name
+      expect(response.body).to include(ERB::Util.html_escape(product.name))
     end
   end
 
@@ -41,6 +42,7 @@ RSpec.describe "Cart", type: :request do
 
     it "updates the product amount in the cart" do
       post update_amount_product_in_cart_path(product), params: { amount: }
+
       expect(session.dig(:products, product.id.to_s)).to eq(amount)
     end
 
