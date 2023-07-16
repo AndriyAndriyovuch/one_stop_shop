@@ -10,7 +10,7 @@ class CartController < ApplicationController
 
     service.call
 
-    redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type]}")
+    # redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type]}")
   end
 
   def destroy
