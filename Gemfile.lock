@@ -6,11 +6,6 @@ GIT
       actionpack (>= 5.2)
       activemodel (>= 5.2)
 
-PATH
-  remote: ../cute_alert_rails
-  specs:
-    cute_alert_rails (0.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,6 +83,7 @@ GEM
     builder (3.2.4)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    cute_alert_rails (0.1.0)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -246,7 +242,7 @@ PLATFORMS
 DEPENDENCIES
   any_login
   bootsnap
-  cute_alert_rails!
+  cute_alert_rails (~> 0.1.0)
   debug
   devise (~> 4.9)
   factory_bot_rails

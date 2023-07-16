@@ -3,7 +3,7 @@
     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
       <div class="overflow-hidden">
         <% if @cart.products_count.nonzero? %>
-          <table class="min-w-full text-left text-sm font-light">
+          <table class="min-w-full text-left text-sm font-light" data->
             <thead class="border-b font-medium dark:border-neutral-500">
               <tr>
                 <th scope="col" class="px-6 py-4">Title</th>
@@ -14,16 +14,20 @@
             </thead>
               <tbody>
                 <% @cart.realized_products.each do |product| %>
-                  <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                  <tr class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600" id=<%= "product-#{product.id}" %>>
                     <td class="table-item"><%= product.name %></td>
                     <td class="table-item"><%= number_to_currency(product.price, unit: "₴ ") %></td>
                     <td class="table-item">
                       <%= render "cart/change_amount_form", product: product %>
                     </td>
-                    <td class="table-item"><%= number_to_currency(@cart.product_sum(product), unit: "₴ ") %></td>
+                    <td class="table-item" id=<%="product-#{product.id}-sum" %>><%= number_to_currency(@cart.product_sum(product), unit: "₴ ") %></td>
                     <td class="table-item">
-                      <%= button_to remove_product_in_cart_path(product) do %>
-                          <i class="fa fa-regular fa-trash fa-2x"></i>
+                      <%= button_to remove_product_in_cart_path(product), data: { controller: "cutealert",
+                                                                                  cutealert_product_value: "product-#{product.id}",
+                                                                                  cutealert_url_value: remove_product_in_cart_path(product),
+                                                                                  action: "click->cutealert#alertToast",
+                                                                                  turbo: false } do %>
+                          <i class="fa fa-regular fa-trash fa-2x" d></i>
                       <% end %>
                     </td>
                   </tr>
@@ -32,7 +36,7 @@
                   <td colspan="3" class="whitespace-nowrap px-6 py-2">
                     Total sum
                   </td>
-                  <td class="whitespace-nowrap px-6 py-2"><%= number_to_currency(@cart.sum, unit: "₴ ") %></td>
+                  <td class="whitespace-nowrap px-6 py-2" id="total-sum"><%= number_to_currency(@cart.sum, unit: "₴ ") %></td>
                 </tr>
               </tbody>
           </table>

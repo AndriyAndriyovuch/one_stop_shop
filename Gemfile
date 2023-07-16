@@ -18,7 +18,7 @@ gem "foreman"
 gem "inline_svg"
 gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
 
-gem 'cute_alert_rails', path: "../cute_alert_rails"
+gem 'cute_alert_rails', '~> 0.1.0'
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
