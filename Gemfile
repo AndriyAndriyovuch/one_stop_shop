@@ -31,4 +31,7 @@ end
 
 group :development do
   gem "web-console"
+  gem 'any_login'
 end
+
+gem "devise", "~> 4.9"

@@ -9,4 +9,5 @@ require 'factory_bot_rails'
 
 products = FactoryBot.create_list(:product, 10)
 
+FactoryBot.create(:user)
 FactoryBot.create_list(:order, 3, products: )
