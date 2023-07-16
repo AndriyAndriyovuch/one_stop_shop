@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
-  before_action :check_cart, only: [:new]
+  before_action :authenticate_user!, only: :index
+  before_action :check_cart, only: :new
 
   def index
     @orders = current_user.orders

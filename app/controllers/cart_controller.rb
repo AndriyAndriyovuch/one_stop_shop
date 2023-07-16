@@ -1,5 +1,5 @@
 class CartController < ApplicationController
-  before_action :initialize_cart, :cart_params_valid?, only: [:update]
+  before_action :initialize_cart, :cart_params_valid?, only: :update
 
   def index
     @cart = Cart::StorageService.new(session, params)

@@ -7,10 +7,9 @@ Rails.application.routes.draw do
 
   resources :cart, only: [:index, :destroy]
 
-
   resources :products, only: [:index, :show] do
     member do
-      resource :cart, only: [:update] do
+      resource :cart, only: :update do
         [:add, :remove, :update_amount].each do |action|
           post action, to: "cart#update", as: "#{action}_product_in", defaults: { action_type: action }
         end

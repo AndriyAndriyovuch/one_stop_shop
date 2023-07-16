@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'factory_bot_rails'
 
-FactoryBot.create_list(:product, 10)
+products = FactoryBot.create_list(:product, 10)
 
 FactoryBot.create(:user)
+FactoryBot.create_list(:order, 3, products: )
