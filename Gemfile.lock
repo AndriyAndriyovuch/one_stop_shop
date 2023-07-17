@@ -1,4 +1,15 @@
 GIT
+  remote: https://github.com/loqimean/monopay-ruby
+  revision: 23c59c3b923c6848c1a002e4e95a59131b542570
+  branch: feature/ability_to_apply_coupon_for_price
+  specs:
+    monopay-ruby (0.1.1)
+      base64 (~> 0.1.1)
+      json (~> 2.5)
+      money (~> 6.13)
+      rest-client (~> 2.1)
+
+GIT
   remote: https://github.com/loqimean/simple_form
   revision: 0641503244fbf3da4ee3bd091a03d9ac410af465
   specs:
@@ -141,11 +152,6 @@ GEM
     minitest (5.18.1)
     money (6.16.0)
       i18n (>= 0.6.4, <= 2)
-    monopay-ruby (0.1.1)
-      base64 (~> 0.1.1)
-      json (~> 2.5)
-      money (~> 6.13)
-      rest-client (~> 2.1)
     msgpack (1.7.1)
     net-imap (0.3.6)
       date
@@ -280,7 +286,7 @@ DEPENDENCIES
   foreman
   importmap-rails
   inline_svg
-  monopay-ruby (~> 0.1.1)
+  monopay-ruby!
   pg (~> 1.1)
   pry
   puma (~> 5.0)

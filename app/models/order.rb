@@ -6,6 +6,8 @@ class Order < ApplicationRecord
 
   belongs_to :customer, class_name: 'User', foreign_key: :customer_id, required: false
 
+  belongs_to :promocode, required: false
+
   validates :first_name, :last_name, :address, :phone, presence: true
 
   def product_sum(product)
@@ -26,5 +28,19 @@ class Order < ApplicationRecord
 
   def customer_full_name
     "#{first_name} #{last_name}"
+  end
+
+  def discount
+    promocode.discount_is_fixed ? number_to_currency(promocode.discount unit: "₴ ") : "#{promocode.discount}%"
+  end
+
+  def final_sum
+    if promocode.discount_is_fixed
+      sum = total_sum - promocode.discount.to_d
+    else
+      sum = total_sum * ((100 - promocode.discount.to_f) / 100)
+    end
+
+    [sum, 0.01].max
   end
 end

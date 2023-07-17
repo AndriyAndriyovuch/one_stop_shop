@@ -29,15 +29,34 @@
                   <td class="cart-item"><%= number_to_currency(@order.product_sum(product), unit: "₴ ") %></td>
                 </tr>
               <% end %>
+
               <tr class="border-b">
                 <td colspan="3" class="whitespace-nowrap font-medium pe-11 py-2 text-right">
                   Total sum
                 </td>
                 <td class="whitespace-nowrap pe-6 py-2"><%= number_to_currency(@order.total_sum, unit: "₴ ") %></td>
               </tr>
-            </tbody>
+
+              <% if @order.promocode.present? %>
+                <tr class="border-b">
+                  <td colspan="3" class="whitespace-nowrap font-medium pe-11 py-2 text-right">
+                    Discount
+                  </td>
+                  <td class="whitespace-nowrap pe-6 py-2"><%= @order.discount %></td>
+                </tr>
+
+                <tr class="border-b">
+                  <td colspan="3" class="whitespace-nowrap font-medium pe-11 py-2 text-right">
+                    Final sum
+                  </td>
+                  <td class="whitespace-nowrap pe-6 py-2"><%= number_to_currency(@order.final_sum, unit: "₴ ") %></td>
+                </tr>
+              <% end %>
+              </tbody>
+
           </table>
-          <%= link_to "PAY", pay_path, class:"btn-black" %>
+          <%= link_to "PAY", pay_path(amount: @order.total_sum, discount: @order.promocode&.discount, discount_is_fixed: @order.promocode&.discount_is_fixed), class:"btn-black" %>
+          <%# pay_path(amount: @order.total_sum, discount: @order.discount, discount_is_fixed: @order.discount_is_fixed) %>
         </div>
       </div>
     </div>
