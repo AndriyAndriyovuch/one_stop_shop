@@ -4,11 +4,15 @@
 
 @layer components {
   .btn-black {
-    @apply inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50 hover:cursor-pointer;
+    @apply inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 font-medium leading-normal text-neutral-50 hover:cursor-pointer;
+  }
+
+  .btn-red {
+    @apply inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 font-medium leading-normal text-black hover:cursor-pointer;
   }
 
   .btn-grey {
-    @apply ml-2 rounded-lg py-2 px-5 bg-gray-200 inline-block font-medium hover:cursor-pointer;
+    @apply inline-block rounded bg-gray-300 px-6 pb-2 pt-2.5 font-medium leading-normal text-black hover:cursor-pointer;
   }
 
   .input-field {
@@ -22,7 +26,6 @@
   .red-pill {
     @apply absolute bottom-auto left-auto right-8 top-7 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-red-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white;
   }
-
   .logo-image {
     @apply h-fit w-48;
   }
@@ -31,11 +34,19 @@
     @apply whitespace-nowrap px-6 py-4;
   }
 
-  #notice {
-    @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block text-center;
+  p[name=notice] {
+    @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg text-center inline-block;
   }
 
-  #alert {
-    @apply py-2 px-3 bg-red-500 mb-5 text-white font-medium rounded-lg inline-block text-center;
+  p[name=alert] {
+    @apply py-2 px-3 bg-red-500 mb-5 text-white font-medium rounded-lg text-center inline-block;
   }
+
+  .dropdown-custom-item {
+    @apply bg-gray-200 hover:bg-gray-400 py-2 px-4 block w-full;
+  }
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }

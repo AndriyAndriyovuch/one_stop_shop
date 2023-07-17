@@ -16,7 +16,7 @@ require "rails_helper"
 RSpec.describe "/products", type: :request do
   let!(:product) { create(:product) }
 
-  describe "GET /index" do
+  describe "GET #index" do
     it "renders a successful response" do
       get products_path
 
@@ -25,7 +25,7 @@ RSpec.describe "/products", type: :request do
     end
   end
 
-  describe "GET /show" do
+  describe "GET #show" do
     it "renders a successful response" do
       get product_path(product)
 

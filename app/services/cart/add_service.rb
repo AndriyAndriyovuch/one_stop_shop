@@ -1,6 +1,5 @@
-class Cart::Add < BaseService
+class Cart::AddService < BaseService
   attr_reader :session, :product
-  attr_accessor :notice
 
   def initialize(session, product)
     @session = session

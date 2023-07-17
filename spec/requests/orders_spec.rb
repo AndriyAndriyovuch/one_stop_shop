@@ -44,7 +44,10 @@ RSpec.describe 'OrdersController', type: :request do
       it 'creates a new order, calls Orders::ManagerService, and redirects to order page' do
         post add_product_in_cart_path(product)
 
-        expect { post orders_path, params: { order: valid_attributes[:order] } }.to change(Order, :count).by(1)
+        expect do
+          post orders_path,
+               params: { order: valid_attributes[:order] }
+        end.to change(Order, :count).by(1)
 
         expect(response).to redirect_to(order_path(Order.last))
         expect(flash[:notice]).to eq('Order was successfully created.')

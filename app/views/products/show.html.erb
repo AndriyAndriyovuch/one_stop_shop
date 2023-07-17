@@ -1,26 +1,28 @@
 <div class="mx-auto">
   <div class="w-full p-1 md:p-2 m-5">
     <div class="grid gap-4 grid-cols-1">
-      <div class="font-semibold text-3xl text-center">
+      <p class="font-semibold text-3xl text-center">
         <%= @product.name %>
-      </div>
+      </p>
 
-      <div>
+      <p>
         <%= @product.description %>
-      </div>
+      </p>
 
-      <div>
+      <p>
         Price: <%= number_to_currency(@product.price, unit: "₴ ") %>
-      </div>
+      </p>
 
-      <div>
+      <p>
         Available: <%= @product.balance %>
-      </div>
+      </p>
     </div>
 
     <div class="relative mb-3">
       <% if @product.balance.nonzero? %>
         <%= render "cart/buy_form", product: @product %>
+      <% else %>
+        <p class="text-3xl text-grey-400 mt-3">Out of stock</p>
       <% end %>
     </div>
 

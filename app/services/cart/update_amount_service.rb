@@ -1,4 +1,4 @@
-class Cart::UpdateAmount < BaseService
+class Cart::UpdateAmountService < BaseService
   attr_reader :session, :product
 
   def initialize(session, product)

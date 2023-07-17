@@ -1,12 +1,13 @@
 class CartController < ApplicationController
-  before_action :initialize_cart, :cart_params_valid?, only: [:update]
+  before_action :initialize_cart, :cart_params_valid?, only: :update
 
   def index
-    @cart = Cart::Storage.new(session, params)
+    @cart = Cart::StorageService.new(session, params)
   end
 
   def update
     service = Cart::ManagerService.new(session, cart_params)
+
     service.call
 
     redirect_back fallback_location: root_path, notice: (I18n.t "cart.notice.#{params[:action_type]}")
@@ -29,10 +30,7 @@ class CartController < ApplicationController
   end
 
   def cart_params_valid?
-    return if cart_params[:id].present? &&
-              cart_params[:id].to_i.is_a?(Integer) &&
-              cart_params[:action_type].present? &&
-              [:add, :update_amount, :remove].include?(cart_params[:action_type])
+    return if cart_params[:id].present?
 
     redirect_back fallback_location: root_path, alert: "Something went wrong" and return
   end
