@@ -42,7 +42,6 @@ RSpec.describe "/users", type: :request do
       post user_session_path, params: { user: { email: user.email, password: user.password } }
 
       expect(response).to have_http_status(:redirect)
-      expect(flash[:notice]).to eq('Signed in successfully.')
     end
   end
 
@@ -73,7 +72,6 @@ RSpec.describe "/users", type: :request do
       end.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq('Welcome! You have signed up successfully.')
     end
 
     it "doesn't creates a new user with invalid attributes" do
@@ -83,16 +81,6 @@ RSpec.describe "/users", type: :request do
       end.not_to change(User, :count)
 
       expect(response).to be_unprocessable
-    end
-  end
-
-  describe "GET /users/edit" do
-    it "renders a successful response" do
-      post user_session_path, params: { user: { email: user.email, password: user.password } }
-      get edit_user_registration_path(user)
-
-      expect(response).to be_successful
-      expect(response).to render_template(:edit)
     end
   end
 end

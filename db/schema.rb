@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_18_134722) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_074320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,7 +22,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_134722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
+    t.bigint "promocode_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["promocode_id"], name: "index_orders_on_promocode_id"
   end
 
   create_table "product_orders", force: :cascade do |t|
@@ -42,6 +44,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_134722) do
     t.integer "balance", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "promocodes", force: :cascade do |t|
+    t.string "code", null: false
+    t.decimal "discount", precision: 8, scale: 2, null: false
+    t.boolean "discount_is_fixed", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_promocodes_on_code", unique: true
   end
 
   create_table "users", force: :cascade do |t|

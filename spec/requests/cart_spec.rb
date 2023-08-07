@@ -17,8 +17,7 @@ RSpec.describe "Cart", type: :request do
       get cart_index_path
 
       expect(response).to be_successful
-      puts product.name
-      expect(response.body).to include(ERB::Util.html_escape(product.name))
+      expect(response.body).to include(CGI.escapeHTML(product.name))
     end
   end
 

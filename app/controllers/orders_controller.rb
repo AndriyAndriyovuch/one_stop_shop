@@ -19,6 +19,11 @@ class OrdersController < ApplicationController
     @cart = Cart::StorageService.new(session, params)
     @order = Order.new(order_params)
 
+    if params[:promocode].present?
+      promo = Promocode.find_by(code: params[:promocode])
+      @order.promocode = promo if promo.present?
+    end
+
     if @order.save
       Orders::ManagerService.new(@order, session).call
 
