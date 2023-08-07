@@ -28,24 +28,20 @@ export default class extends Controller {
     });
 
     const productContainer = document.getElementById(this.productValue)
+    const productSum = document.getElementById(`${this.productValue}-sum`)
+    const totalSum = document.getElementById("total-sum")
+    const productsCount = document.getElementById("products-count")
+
     productContainer.remove()
 
-    const productsCount = document.getElementById("products-count")
     productsCount.textContent = Number(productsCount.textContent) - 1
 
-    const productSum = document.getElementById(`${String(this.productValue)}-sum`)
-    const totalSum = document.getElementById("total-sum")
-
-    console.log(productSum)
-    console.log(totalSum)
-
-    totalSum.textContent = `₴ ${Number(totalSum.textContent.slice(2)) - Number(productSum.textContent.slice(2))}`
+    totalSum.textContent = `₴ ${(Number(totalSum.textContent.slice(2)) - Number(productSum.textContent.slice(2))).toFixed(2)}`
 
     const csrfToken = document.querySelector("[name='csrf-token']").content
 
     fetch(this.urlValue, {
       method: "POST",
-
       headers: {
         'X-CSRF-Token': csrfToken
       },
