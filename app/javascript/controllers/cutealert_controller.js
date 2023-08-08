@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
     url: String,
-    product: String
+    product: String,
   }
 
   connect() {
@@ -16,7 +16,13 @@ export default class extends Controller {
       title: "Great",
       message: "Product was successfully added",
       timer: 2000
-    })
+    });
+
+    localStorage.setItem(`${this.productValue}`, "1");
+
+    const productsCount = document.getElementById("products-count")
+
+    productsCount.innerHTML = `${localStorage.length}`
   }
 
   alertToast() {
@@ -46,5 +52,7 @@ export default class extends Controller {
         'X-CSRF-Token': csrfToken
       },
     })
+
+    localStorage.removeItem(`${this.productValue}`)
   }
 }

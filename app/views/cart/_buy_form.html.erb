@@ -1,6 +1,9 @@
 <div data-controller="cutealert">
   <%= form_with url: add_product_in_cart_path(product) do |f| %>
     <%= f.number_field :amount, class: "input-field w-24 h-9 inline-block", min: 1 %>
-    <%= f.submit "Add to cart", class: "btn-black", data: { cutealert_target: "input", action: "click->cutealert#successToast", turbo: false } %>
+    <%= f.submit "Add to cart", class: "btn-black", data: { controller: "cutealert",
+                                                            action: "click->cutealert#successToast",
+                                                            cutealert_product_value: "product-#{product.id}",
+                                                            turbo: false } %>
   <% end %>
 </div>
