@@ -17,6 +17,9 @@ gem "foreman"
 
 gem "inline_svg"
 gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
+gem "monopay-ruby", git: 'https://github.com/loqimean/monopay-ruby', branch: 'feature/ability_to_apply_coupon_for_price'
+
+gem "pry"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
