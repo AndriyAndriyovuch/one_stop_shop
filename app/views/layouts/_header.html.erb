@@ -13,7 +13,7 @@
           <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
             <li><%= link_to "Show my orders", orders_path, class: "dropdown-custom-item" %></li>
             <li><%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-custom-item" %></li>
-            <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "dropdown-custom-item" %></li>
+            <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-custom-item" %></li>
           </ul>
         </div>
       <% else %>

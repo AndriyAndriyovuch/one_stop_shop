@@ -20,6 +20,8 @@ RSpec.describe 'OrdersController', type: :request do
   let(:valid_attributes) { { order: attributes_for(:order) } }
   let(:invalid_attributes) { { order: attributes_for(:order, :invalid_order) } }
 
+  before { post add_product_in_cart_path(product) }
+
   describe 'GET #show' do
     it 'returns the order' do
       get order_path(order)
@@ -31,7 +33,6 @@ RSpec.describe 'OrdersController', type: :request do
 
   describe 'GET #new' do
     it 'sets products and initializes a new order' do
-      post add_product_in_cart_path(product)
       get new_order_path
 
       expect(response).to be_successful
@@ -41,9 +42,7 @@ RSpec.describe 'OrdersController', type: :request do
 
   describe 'POST #create' do
     context 'with valid order params' do
-      it 'creates a new order, calls Orders::ManagerService, and redirects to order page' do
-        post add_product_in_cart_path(product)
-
+      it 'creates a new order, and redirects to order page' do
         expect do
           post orders_path,
                params: { order: valid_attributes[:order] }
@@ -58,9 +57,10 @@ RSpec.describe 'OrdersController', type: :request do
 
     context 'with invalid order params' do
       it 'renders the new template with unprocessable entity status' do
-        post add_product_in_cart_path(product)
-
-        post orders_path, params: { order: invalid_attributes[:order] }
+        expect do
+          post orders_path,
+               params: { order: invalid_attributes[:order] }
+        end.not_to change(Order, :count)
 
         expect(response).to be_unprocessable
         expect(response).to render_template(:new)

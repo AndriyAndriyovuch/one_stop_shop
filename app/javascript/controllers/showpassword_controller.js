@@ -10,12 +10,7 @@ export default class extends Controller {
   }
 
   displayPassword() {
-    if (this.inputTarget.value === "") {
-      this.outputContainerTarget.hidden = true
-      this.outputFieldTarget.disabled = true
-    } else {
-      this.outputContainerTarget.hidden = false
-      this.outputFieldTarget.disabled = false
-    }
+    this.outputContainerTarget.hidden = (this.inputTarget.value === "")
+    this.outputFieldTarget.disabled = (this.inputTarget.value === "")
   }
 }
