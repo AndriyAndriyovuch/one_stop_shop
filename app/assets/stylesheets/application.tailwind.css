@@ -1,20 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "./components/buttons.css";
+@import "tailwindcss/utilities";
 
 @layer components {
-  .btn-black {
-    @apply inline-block rounded bg-neutral-800 px-6 pb-2 pt-2.5 font-medium leading-normal text-neutral-50 hover:cursor-pointer;
-  }
-
-  .btn-red {
-    @apply inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 font-medium leading-normal text-black hover:cursor-pointer;
-  }
-
-  .btn-grey {
-    @apply inline-block rounded bg-gray-300 px-6 pb-2 pt-2.5 font-medium leading-normal text-black hover:cursor-pointer;
-  }
-
   .input-field {
     @apply block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2;
   }
@@ -45,8 +34,8 @@
   .dropdown-custom-item {
     @apply bg-gray-200 hover:bg-gray-400 py-2 px-4 block w-full;
   }
-}
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+  .dropdown:hover .dropdown-menu {
+    @apply block;
+  }
 }
