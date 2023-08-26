@@ -9,11 +9,7 @@ class PaymentsController < ApplicationController
     amount = params[:amount].to_d
     discount_is_fixed = params[:discount_is_fixed] == "true"
 
-    if discount_is_fixed
-      discount = params[:discount].to_d
-    else
-      discount = params[:discount].to_i
-    end
+    discount = discount_is_fixed ? params[:discount].to_d : params[:discount].to_i
 
     if payment.create(amount, discount, discount_is_fixed)
       redirect_to payment.page_url, allow_other_host: true

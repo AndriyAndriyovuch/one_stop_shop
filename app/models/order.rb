@@ -31,7 +31,7 @@ class Order < ApplicationRecord
   end
 
   def discount
-    promocode.discount_is_fixed ? number_to_currency(promocode.discount unit: "₴ ") : "#{promocode.discount}%"
+    promocode.discount_is_fixed ? "₴ #{promocode.discount}" : "#{promocode.discount}%"
   end
 
   def final_sum

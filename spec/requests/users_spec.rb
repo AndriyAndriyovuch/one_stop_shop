@@ -72,8 +72,8 @@ RSpec.describe "/users", type: :request do
       end.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq('A message with a confirmation link has been sent to your email address.
-        Please follow the link to activate your account.')
+      expect(flash[:notice]).to eq("A message with a confirmation link has been sent to your email address. \
+Please follow the link to activate your account.")
     end
 
     it "doesn't creates a new user with invalid attributes" do

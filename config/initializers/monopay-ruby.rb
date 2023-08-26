@@ -1,3 +1,3 @@
 MonopayRuby.configure do |config|
-  config.api_token = "unTR4RajEwpHQYYl_KtSTdRv8rbeoTpousvJCaM0vpFo"
+  config.api_token = ENV["MONOBANK_TOKEN"]
 end
