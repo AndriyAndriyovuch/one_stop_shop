@@ -29,6 +29,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     address { Faker::Address.full_address }
     phone { Faker::PhoneNumber.cell_phone }
+    confirmed_at { Time.now }
   end
 
   trait :invalid_user do

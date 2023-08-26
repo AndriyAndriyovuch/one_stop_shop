@@ -73,7 +73,8 @@ RSpec.describe "/users", type: :request do
       end.to change(User, :count).by(1)
 
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq('Welcome! You have signed up successfully.')
+      expect(flash[:notice]).to eq('A message with a confirmation link has been sent to your email address.
+        Please follow the link to activate your account.')
     end
 
     it "doesn't creates a new user with invalid attributes" do
@@ -88,11 +89,15 @@ RSpec.describe "/users", type: :request do
 
   describe "GET /users/edit" do
     it "renders a successful response" do
-      post user_session_path, params: { user: { email: user.email, password: user.password } }
+      sign_in user
       get edit_user_registration_path(user)
 
       expect(response).to be_successful
       expect(response).to render_template(:edit)
+
+      expect(response.body).to include(user.first_name)
+      expect(response.body).to include(user.last_name)
+      expect(response.body).to include(user.email)
     end
   end
 end

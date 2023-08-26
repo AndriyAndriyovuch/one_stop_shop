@@ -7,7 +7,7 @@ Devise.setup do |config|
 
   config.case_insensitive_keys = [:email]
   config.strip_whitespace_keys = [:email]
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = /\A[a-zA-Z0-9_.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+\z/
 
   config.skip_session_storage = [:http_auth]
 
