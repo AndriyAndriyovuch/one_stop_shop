@@ -32,6 +32,6 @@ class CartController < ApplicationController
   def cart_params_valid?
     return if cart_params[:id].present?
 
-    redirect_back fallback_location: root_path, alert: "Something went wrong" and return
+    redirect_back fallback_location: root_path, alert: "Something went wrong"
   end
 end
