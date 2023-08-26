@@ -1,5 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: :index
   before_action :check_cart, only: :new
+
+  def index
+    @orders = current_user.orders
+  end
 
   def show
     @order = resourse
@@ -34,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:first_name, :last_name, :address, :phone)
+    params.require(:order).permit(:first_name, :last_name, :address, :phone, :customer_id)
   end
 
   def check_cart
