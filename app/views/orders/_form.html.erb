@@ -1,0 +1,8 @@
+<%= simple_form_for order, defaults: { input_html: { class: 'input-field w-2/3' } } do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :address %>
+  <%= f.input :phone %>
+
+  <%= f.button :submit, class: 'btn-black mb-5 p-5' %>
+<% end %>

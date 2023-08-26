@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  cart:
+    notice:
+      add: "Product was added to cart"
+      update_amount: "Product's amount was updated"
+      remove: "Product was removed from cart"
