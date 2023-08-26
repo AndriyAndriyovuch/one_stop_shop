@@ -28,7 +28,6 @@ RSpec.describe 'OrdersController', type: :request do
 
       expect(response).to be_successful
       expect(response).to render_template(:show)
-
     end
   end
 
