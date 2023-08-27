@@ -7,6 +7,12 @@
     </div>
 
     <div class="flex items-center ml-auto">
+      <div>
+        <%= form_with url: home_search_path, method: :get, role: "search" do |form| %>
+          <%= form.text_field :q, class: "input-field m-0 mr-3 text-black", placeholder: 'Search' %>
+        <% end %>
+      </div>
+
       <% if user_signed_in? %>
         <div class="dropdown inline-block relative cursor-context-menu">
           <p class="me-5 "><%= current_user.full_name %></p>

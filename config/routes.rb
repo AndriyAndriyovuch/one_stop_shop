@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/search'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

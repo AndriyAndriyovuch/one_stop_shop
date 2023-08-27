@@ -21,6 +21,10 @@ gem "monopay-ruby", git: 'https://github.com/loqimean/monopay-ruby', branch: 'fe
 
 gem "pry"
 
+gem "elasticsearch-model"
+gem "elasticsearch-rails"
+gem "elasticsearch-persistence"
+
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "faker"
