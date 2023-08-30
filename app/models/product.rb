@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include Searchable
+
   scope :ordered, -> { order(name: :asc) }
 
   has_many :product_orders, dependent: :destroy
