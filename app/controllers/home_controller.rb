@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 
     @products = Product.where(id: products.map(&:id))
 
-    render "products/index", status: :ok
+    render "products/index", status: :success
   end
 
   private
